@@ -1,2 +1,2 @@
 # lightit
-Lit your hookah using neopixel ring!
+Light up your hookah with a neopixel ring!
