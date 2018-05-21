@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/bmp")
-public class BMP180Controller {
+@RequestMapping(path = "/pressure")
+public class PressureController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BMP180Controller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PressureController.class);
 
     @Autowired
     private PressureService pressureService;
@@ -25,9 +25,9 @@ public class BMP180Controller {
     @Autowired
     private LedService ledService;
 
-    @GetMapping(path = "/pressure")
+    @GetMapping(path = "/")
     public ResponseEntity getPressure() {
-        float pressure = 0;
+        float pressure;
         try {
             pressure = pressureService.getPressure();
         } catch (PressureException e) {
