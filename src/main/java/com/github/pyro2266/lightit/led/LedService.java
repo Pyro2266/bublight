@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.services;
+package com.github.pyro2266.lightit.led;
 
 import com.github.mbelling.ws281x.LedStrip;
 import com.github.mbelling.ws281x.LedStripType;
