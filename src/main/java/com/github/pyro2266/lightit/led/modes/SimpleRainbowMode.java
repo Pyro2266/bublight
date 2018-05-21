@@ -9,12 +9,12 @@ public class SimpleRainbowMode implements LedMode {
 
     private static final Logger LOG = LoggerFactory.getLogger(SimpleRainbowMode.class);
     private static final String MODE_ID = "Rainbow";
-    private static final int MAX_HUE = 360;
+    private static final int MAX_HUE = 1;
 
-    private int step = 5;
-    private int hue = 0;
-    private int saturation = 100;
-    private int value = 100;
+    private float step = 0.001f;
+    private float hue = 0;
+    private float saturation = 1;
+    private float value = 1;
 
     @Override
     public String getModeId() {
@@ -31,35 +31,35 @@ public class SimpleRainbowMode implements LedMode {
         return newColors;
     }
 
-    public int getStep() {
+    public float getStep() {
         return step;
     }
 
-    public void setStep(int step) {
+    public void setStep(float step) {
         this.step = step;
     }
 
-    public int getHue() {
+    public float getHue() {
         return hue;
     }
 
-    public void setHue(int hue) {
+    public void setHue(float hue) {
         this.hue = hue;
     }
 
-    public int getSaturation() {
+    public float getSaturation() {
         return saturation;
     }
 
-    public void setSaturation(int saturation) {
+    public void setSaturation(float saturation) {
         this.saturation = saturation;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         this.value = value;
     }
 }
