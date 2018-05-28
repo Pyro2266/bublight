@@ -1,17 +1,20 @@
-package com.github.pyro2266.lightit.led.modes;
+package com.github.pyro2266.lightit.led.modes.impl.base;
 
-import com.github.mbelling.ws281x.Color;
-import com.github.pyro2266.lightit.led.LedService;
+import com.github.pyro2266.lightit.led.core.LedService;
+import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
+import java.awt.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-public class SimpleRainbowMode implements LedMode {
+@Component
+public class SimpleRainbowMode implements BaseLedMode {
 
     private static final Logger LOG = LoggerFactory.getLogger(SimpleRainbowMode.class);
-    private static final String MODE_ID = "Rainbow";
+    private static final String MODE_ID = "Simple rainbow";
     private static final int MAX_HUE = 1;
 
-    private float step = 0.001f;
+    private float step = 0.0001f;
     private float hue = 0;
     private float saturation = 1;
     private float value = 1;
@@ -22,10 +25,10 @@ public class SimpleRainbowMode implements LedMode {
     }
 
     @Override
-    public Color[] getNextColors(Color[] previousColors) {
+    public Color[] getNextColors() {
         Color[] newColors = new Color[LedService.LED_COUNT];
         for (int i = 0; i < newColors.length; i++) {
-            newColors[i] = new Color(java.awt.Color.getHSBColor(hue, saturation, value).getRGB());
+            newColors[i] = new Color(Color.getHSBColor(hue, saturation, value).getRGB());
         }
         hue = hue % MAX_HUE + step;
         return newColors;

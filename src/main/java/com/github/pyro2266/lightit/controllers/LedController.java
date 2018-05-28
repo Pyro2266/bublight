@@ -1,6 +1,6 @@
 package com.github.pyro2266.lightit.controllers;
 
-import com.github.pyro2266.lightit.led.LedService;
+import com.github.pyro2266.lightit.led.core.LedService;
 import com.github.pyro2266.lightit.pressure.PressureException;
 import com.github.pyro2266.lightit.pressure.PressureService;
 import org.slf4j.Logger;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO Refactor this class to reflect changes in modes. Probably create ModeController class and move API for
+// switching and configuring modes there.
+
 @RestController
 @RequestMapping(path = "/led")
 public class LedController {
@@ -22,14 +25,9 @@ public class LedController {
     @Autowired
     private LedService ledService;
 
+    /*
     @Autowired
     private PressureService pressureService;
-
-    @PostMapping(path = "/{red}/{green}/{blue}")
-    public ResponseEntity turnOn(@PathVariable int red, @PathVariable int green, @PathVariable int blue) {
-        ledService.renderColor(red, green, blue);
-        return ResponseEntity.ok().build();
-    }
 
     @PostMapping(path = "/start")
     public ResponseEntity start() {
@@ -66,5 +64,5 @@ public class LedController {
     public ResponseEntity setDefaultBrightness(@PathVariable int brightness) {
         ledService.setDefaultBrightness(brightness);
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
