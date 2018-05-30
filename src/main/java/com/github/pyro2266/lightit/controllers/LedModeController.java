@@ -4,6 +4,7 @@ import com.github.pyro2266.lightit.led.core.LedService;
 import com.github.pyro2266.lightit.led.modes.impl.base.SimpleColorMode;
 import com.github.pyro2266.lightit.led.modes.impl.base.SimpleColorModeConfig;
 import com.github.pyro2266.lightit.led.modes.impl.base.SimpleRainbowMode;
+import com.github.pyro2266.lightit.led.modes.impl.base.SimpleRainbowModeConfig;
 import com.github.pyro2266.lightit.led.modes.impl.overlay.BrightnessByPressureMode;
 import com.github.pyro2266.lightit.led.modes.impl.overlay.BrightnessByPressureModeConfig;
 import org.slf4j.Logger;
@@ -50,11 +51,17 @@ public class LedModeController {
     }
 
     @PostMapping(path = "/base/simpleRainbowMode")
-    public ResponseEntity activateSimpleRainbowMode() {
+    public ResponseEntity activateSimpleRainbowMode(@RequestBody SimpleRainbowModeConfig config) {
         LOG.info("Activating {}", SimpleRainbowMode.class);
         ledService.setBaseLedMode(simpleRainbowMode);
         return ResponseEntity.ok().build();
+    }
 
+    @GetMapping(path = "/base/simpleRainbowMode")
+    public ResponseEntity getCurrentSimpleRainbowModeConfig() {
+        SimpleRainbowModeConfig config = simpleRainbowMode.getConfig();
+        LOG.info("Current config for {} is {}", SimpleRainbowMode.class, config);
+        return ResponseEntity.ok(config);
     }
 
     @PostMapping(path = "/overlay/brightnessByPressureMode")

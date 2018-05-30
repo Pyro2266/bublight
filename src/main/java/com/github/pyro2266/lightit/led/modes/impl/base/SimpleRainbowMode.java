@@ -1,8 +1,8 @@
 package com.github.pyro2266.lightit.led.modes.impl.base;
 
+import com.github.pyro2266.lightit.led.core.Color;
 import com.github.pyro2266.lightit.led.core.LedService;
 import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
-import java.awt.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,11 @@ public class SimpleRainbowMode implements BaseLedMode {
     private static final String MODE_ID = "Simple rainbow";
     private static final int MAX_HUE = 1;
 
-    private float step = 0.0001f;
     private float hue = 0;
     private float saturation = 1;
     private float value = 1;
+
+    private SimpleRainbowModeConfig config = new SimpleRainbowModeConfig();
 
     @Override
     public String getModeId() {
@@ -28,18 +29,10 @@ public class SimpleRainbowMode implements BaseLedMode {
     public Color[] getNextColors() {
         Color[] newColors = new Color[LedService.LED_COUNT];
         for (int i = 0; i < newColors.length; i++) {
-            newColors[i] = new Color(Color.getHSBColor(hue, saturation, value).getRGB());
+            newColors[i] = new Color(hue, saturation, value);
         }
-        hue = hue % MAX_HUE + step;
+        hue = hue % MAX_HUE + config.getStep();
         return newColors;
-    }
-
-    public float getStep() {
-        return step;
-    }
-
-    public void setStep(float step) {
-        this.step = step;
     }
 
     public float getHue() {
@@ -64,5 +57,13 @@ public class SimpleRainbowMode implements BaseLedMode {
 
     public void setValue(float value) {
         this.value = value;
+    }
+
+    public SimpleRainbowModeConfig getConfig() {
+        return config;
+    }
+
+    public void setConfig(SimpleRainbowModeConfig config) {
+        this.config = config;
     }
 }

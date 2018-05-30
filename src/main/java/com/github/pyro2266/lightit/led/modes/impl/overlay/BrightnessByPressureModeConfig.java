@@ -7,6 +7,7 @@ public class BrightnessByPressureModeConfig {
     private float defaultBrightness = 0.2f;
     private float minBrightness = 0.05f;
     private float maxBrightness = 1f;
+    private float maxStep = 0.05f;
 
     public float getPositivePressureRange() {
         return positivePressureRange;
@@ -48,10 +49,19 @@ public class BrightnessByPressureModeConfig {
         this.maxBrightness = maxBrightness;
     }
 
+    public float getMaxStep() {
+        return maxStep;
+    }
+
+    public void setMaxStep(float maxStep) {
+        this.maxStep = maxStep;
+    }
+
     @Override
     public String toString() {
         return "BrightnessByPressureModeConfig{" + "positivePressureRange=" + positivePressureRange
                 + ", negativePressureRange=" + negativePressureRange + ", defaultBrightness=" + defaultBrightness
-                + ", minBrightness=" + minBrightness + ", maxBrightness=" + maxBrightness + '}';
+                + ", minBrightness=" + minBrightness + ", maxBrightness=" + maxBrightness + ", maxStep=" + maxStep
+                + '}';
     }
 }

@@ -6,7 +6,6 @@ import com.github.mbelling.ws281x.Ws281xLedStrip;
 import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
 import com.github.pyro2266.lightit.led.modes.api.LedModeException;
 import com.github.pyro2266.lightit.led.modes.api.OverlayLedMode;
-import java.awt.Color;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;

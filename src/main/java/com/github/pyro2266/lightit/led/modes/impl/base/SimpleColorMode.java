@@ -1,8 +1,8 @@
 package com.github.pyro2266.lightit.led.modes.impl.base;
 
+import com.github.pyro2266.lightit.led.core.Color;
 import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
 import com.github.pyro2266.lightit.led.modes.api.LedModeException;
-import java.awt.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ public class SimpleColorMode implements BaseLedMode {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleColorMode.class);
     private static final String MODE_ID = "Simple";
 
-    private SimpleColorModeConfig config;
+    private SimpleColorModeConfig config = new SimpleColorModeConfig();
 
     @Override
     public String getModeId() {

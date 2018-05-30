@@ -1,9 +1,9 @@
 package com.github.pyro2266.lightit.led.modes.impl.overlay;
 
+import com.github.pyro2266.lightit.led.core.Color;
 import com.github.pyro2266.lightit.led.modes.api.OverlayLedMode;
 import com.github.pyro2266.lightit.pressure.PressureException;
 import com.github.pyro2266.lightit.pressure.PressureService;
-import java.awt.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
 
     private BrightnessByPressureModeConfig config = new BrightnessByPressureModeConfig();
     private float[] hsb = new float[3];
+    private float actualBrightness = config.getDefaultBrightness();
 
     @Autowired
     private PressureService pressureService;
@@ -30,6 +31,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
+                // TODO refactor...
                 float pressureDif = pressureService.getPressureDifference();
 
                 float brightnessDelta;
@@ -41,12 +43,30 @@ public class BrightnessByPressureMode implements OverlayLedMode {
                             * (config.getDefaultBrightness() - config.getMinBrightness());
                 }
 
-                float brightness = config.getDefaultBrightness() + brightnessDelta;
+                float targetBrightness = config.getDefaultBrightness() + brightnessDelta;
+
+                float brightnessDifference = targetBrightness - actualBrightness;
+                float step;
+                if (Math.abs(brightnessDifference) > config.getMaxStep()) {
+                    step = config.getMaxStep() * (brightnessDelta < 0 ? -1 : 1);
+                } else {
+                    step = brightnessDifference;
+                }
+
+                actualBrightness += step;
+                if (actualBrightness > config.getMaxBrightness()) {
+                    actualBrightness = config.getMaxBrightness();
+                }
+                if (actualBrightness < config.getMinBrightness()) {
+                    actualBrightness = config.getMinBrightness();
+                }
+
+                LOG.info("Target {}; actual {}; step {}", targetBrightness, actualBrightness, step);
 
                 for (int i = 0; i < baseColors.length; i++) {
-                    Color.RGBtoHSB(baseColors[i].getRed(), baseColors[i].getGreen(), baseColors[i].getBlue(),
+                    Color.rgbToHsb(baseColors[i].getRed(), baseColors[i].getGreen(), baseColors[i].getBlue(),
                             hsb);
-                    baseColors[i] = new Color(Color.HSBtoRGB(hsb[0], hsb[1], brightness));
+                    baseColors[i] = new Color(hsb[0], hsb[1], actualBrightness);
                 }
             } catch (PressureException e) {
                 LOG.error("Unable to set brightness", e);
