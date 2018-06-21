@@ -48,7 +48,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
                 float brightnessDifference = targetBrightness - actualBrightness;
                 float step;
                 if (Math.abs(brightnessDifference) > config.getMaxStep()) {
-                    step = config.getMaxStep() * (brightnessDelta < 0 ? -1 : 1);
+                    step = config.getMaxStep() * (brightnessDifference < 0 ? -1 : 1);
                 } else {
                     step = brightnessDifference;
                 }
@@ -60,8 +60,6 @@ public class BrightnessByPressureMode implements OverlayLedMode {
                 if (actualBrightness < config.getMinBrightness()) {
                     actualBrightness = config.getMinBrightness();
                 }
-
-                LOG.info("Target {}; actual {}; step {}", targetBrightness, actualBrightness, step);
 
                 for (int i = 0; i < baseColors.length; i++) {
                     Color.rgbToHsb(baseColors[i].getRed(), baseColors[i].getGreen(), baseColors[i].getBlue(),
