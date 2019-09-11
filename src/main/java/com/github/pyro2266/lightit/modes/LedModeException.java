@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.led.modes.api;
+package com.github.pyro2266.lightit.modes;
 
 public class LedModeException extends Exception {
 

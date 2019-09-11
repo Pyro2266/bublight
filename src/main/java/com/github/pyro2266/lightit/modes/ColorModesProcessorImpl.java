@@ -1,26 +1,24 @@
-package com.github.pyro2266.lightit.led.core;
+package com.github.pyro2266.lightit.modes;
 
-import com.github.mbelling.ws281x.LedStrip;
-import com.github.mbelling.ws281x.LedStripType;
-import com.github.mbelling.ws281x.Ws281xLedStrip;
-import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
-import com.github.pyro2266.lightit.led.modes.api.LedModeException;
-import com.github.pyro2266.lightit.led.modes.api.OverlayLedMode;
+import com.github.pyro2266.lightit.configuration.LightItConfiguration;
+import com.github.pyro2266.lightit.led.core.LedRendererService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LedServiceImpl implements LedService {
+public class ColorModesProcessorImpl implements ColorModesProcessor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LedServiceImpl.class);
-    public static final int LED_COUNT = 16;
+    private static final Logger LOG = LoggerFactory.getLogger(ColorModesProcessorImpl.class);
 
-    private LedStrip strip;
+    private LedRendererService ledRenderer;
+    private LightItConfiguration lightItConfiguration;
+
     private Color[] colors;
     private BaseLedMode baseLedMode;
     private OverlayLedMode overlayLedMode;
@@ -30,10 +28,11 @@ public class LedServiceImpl implements LedService {
     private AtomicBoolean isRunning = new AtomicBoolean(false);
     private ReentrantLock modeLock = new ReentrantLock();
 
-    public LedServiceImpl() {
-        this.strip = new Ws281xLedStrip(LED_COUNT, 18, 800000, 10, 255, 0, false, LedStripType.WS2811_STRIP_GRB, true);
-
-        this.colors = new Color[LedServiceImpl.LED_COUNT];
+    @Autowired
+    public ColorModesProcessorImpl(LedRendererService ledRenderer, LightItConfiguration lightItConfiguration) {
+        this.ledRenderer = ledRenderer;
+        this.lightItConfiguration = lightItConfiguration;
+        this.colors = new Color[this.lightItConfiguration.getLedCount()];
         for (int i = 0; i < colors.length; i++) {
             colors[i] = new Color(55, 55, 55);
         }
@@ -66,10 +65,7 @@ public class LedServiceImpl implements LedService {
                     modeLock.unlock();
                 }
 
-                for (int i = 0; i < colors.length; i++) {
-                    strip.setPixel(i, colors[i].getRed(), colors[i].getGreen(), colors[i].getBlue());
-                }
-                strip.render();
+                ledRenderer.renderColors(colors);
 
                 try {
                     Thread.sleep(refreshRate.get());

@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.led.modes.impl.base;
+package com.github.pyro2266.lightit.modes.base;
 
 public class SimpleRainbowModeConfig {
 

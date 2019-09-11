@@ -1,7 +1,7 @@
-package com.github.pyro2266.lightit.led.modes.impl.base;
+package com.github.pyro2266.lightit.modes.base;
 
-import com.github.pyro2266.lightit.led.core.Color;
-import com.github.pyro2266.lightit.led.core.LedServiceImpl;
+import com.github.pyro2266.lightit.led.core.LedRendererServiceImpl;
+import com.github.pyro2266.lightit.modes.Color;
 import java.util.Arrays;
 
 public class SimpleColorModeConfig {
@@ -10,13 +10,6 @@ public class SimpleColorModeConfig {
 
     public SimpleColorModeConfig(Color[] colors) {
         this.colors = colors;
-    }
-
-    public SimpleColorModeConfig() {
-        colors = new Color[LedServiceImpl.LED_COUNT];
-        for (int i = 0; i < colors.length; i++) {
-            colors[i] = new Color();
-        }
     }
 
     public Color[] getColors() {

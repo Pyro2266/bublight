@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.led.core;
+package com.github.pyro2266.lightit.modes;
 
 public class Color {
 

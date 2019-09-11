@@ -1,9 +1,6 @@
-package com.github.pyro2266.lightit.led.core;
+package com.github.pyro2266.lightit.modes;
 
-import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
-import com.github.pyro2266.lightit.led.modes.api.OverlayLedMode;
-
-public interface LedService {
+public interface ColorModesProcessor {
 
     /**
      * Start color rendering loop.

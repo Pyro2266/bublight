@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.led.modes.impl.overlay;
+package com.github.pyro2266.lightit.modes.overlay;
 
 public class BrightnessByPressureModeConfig {
 

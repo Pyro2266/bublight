@@ -1,7 +1,7 @@
-package com.github.pyro2266.lightit.led.modes.impl.overlay;
+package com.github.pyro2266.lightit.modes.overlay;
 
-import com.github.pyro2266.lightit.led.core.Color;
-import com.github.pyro2266.lightit.led.modes.api.OverlayLedMode;
+import com.github.pyro2266.lightit.modes.Color;
+import com.github.pyro2266.lightit.modes.OverlayLedMode;
 import com.github.pyro2266.lightit.pressure.PressureException;
 import com.github.pyro2266.lightit.pressure.PressureService;
 import org.slf4j.Logger;

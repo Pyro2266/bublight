@@ -1,6 +1,4 @@
-package com.github.pyro2266.lightit.led.modes.api;
-
-import com.github.pyro2266.lightit.led.core.Color;
+package com.github.pyro2266.lightit.modes;
 
 public interface OverlayLedMode extends LedMode {
 

@@ -1,12 +1,12 @@
 package com.github.pyro2266.lightit.controllers;
 
-import com.github.pyro2266.lightit.led.core.LedService;
-import com.github.pyro2266.lightit.led.modes.impl.base.SimpleColorMode;
-import com.github.pyro2266.lightit.led.modes.impl.base.SimpleColorModeConfig;
-import com.github.pyro2266.lightit.led.modes.impl.base.SimpleRainbowMode;
-import com.github.pyro2266.lightit.led.modes.impl.base.SimpleRainbowModeConfig;
-import com.github.pyro2266.lightit.led.modes.impl.overlay.BrightnessByPressureMode;
-import com.github.pyro2266.lightit.led.modes.impl.overlay.BrightnessByPressureModeConfig;
+import com.github.pyro2266.lightit.modes.ColorModesProcessor;
+import com.github.pyro2266.lightit.modes.base.SimpleColorMode;
+import com.github.pyro2266.lightit.modes.base.SimpleColorModeConfig;
+import com.github.pyro2266.lightit.modes.base.SimpleRainbowMode;
+import com.github.pyro2266.lightit.modes.base.SimpleRainbowModeConfig;
+import com.github.pyro2266.lightit.modes.overlay.BrightnessByPressureMode;
+import com.github.pyro2266.lightit.modes.overlay.BrightnessByPressureModeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,15 @@ public class LedModeController {
 
     private static final Logger LOG = LoggerFactory.getLogger(LedModeController.class);
 
-    private LedService ledService;
+    private ColorModesProcessor colorModesProcessor;
     private SimpleColorMode simpleColorMode;
     private SimpleRainbowMode simpleRainbowMode;
     private BrightnessByPressureMode brightnessByPressureMode;
 
     @Autowired
-    public LedModeController(LedService ledService, SimpleColorMode simpleColorMode,
+    public LedModeController(ColorModesProcessor colorModesProcessor, SimpleColorMode simpleColorMode,
             SimpleRainbowMode simpleRainbowMode, BrightnessByPressureMode brightnessByPressureMode) {
-        this.ledService = ledService;
+        this.colorModesProcessor = colorModesProcessor;
         this.simpleColorMode = simpleColorMode;
         this.simpleRainbowMode = simpleRainbowMode;
         this.brightnessByPressureMode = brightnessByPressureMode;
@@ -41,7 +41,7 @@ public class LedModeController {
     public ResponseEntity activateSimpleColorMode(@RequestBody SimpleColorModeConfig config) {
         LOG.info("Activating {} with config {}", SimpleColorMode.class, config);
         simpleColorMode.setConfig(config);
-        ledService.setBaseLedMode(simpleColorMode);
+        colorModesProcessor.setBaseLedMode(simpleColorMode);
         return ResponseEntity.ok().build();
     }
 
@@ -55,7 +55,7 @@ public class LedModeController {
     @PostMapping(path = "/base/simpleRainbowMode")
     public ResponseEntity activateSimpleRainbowMode(@RequestBody SimpleRainbowModeConfig config) {
         LOG.info("Activating {}", SimpleRainbowMode.class);
-        ledService.setBaseLedMode(simpleRainbowMode);
+        colorModesProcessor.setBaseLedMode(simpleRainbowMode);
         return ResponseEntity.ok().build();
     }
 
@@ -70,7 +70,7 @@ public class LedModeController {
     public ResponseEntity activateBrightnessByPressureMode(@RequestBody BrightnessByPressureModeConfig config) {
         LOG.info("Activating {} with config {}", BrightnessByPressureMode.class, config);
         brightnessByPressureMode.setConfig(config);
-        ledService.setOverlayLedMode(brightnessByPressureMode);
+        colorModesProcessor.setOverlayLedMode(brightnessByPressureMode);
         return ResponseEntity.ok().build();
     }
 
