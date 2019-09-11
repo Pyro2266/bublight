@@ -1,6 +1,6 @@
 package com.github.pyro2266.lightit.pressure;
 
-import itx.rpi.hardware.gpio.sensors.BMP180;
+import com.github.pyro2266.lightit.drivers.BMP180;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.annotation.PostConstruct;

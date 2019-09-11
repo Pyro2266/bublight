@@ -30,11 +30,6 @@
             <version>2.0.0</version>
         </dependency>
         <dependency>
-            <groupId>itx.rpi.hardware</groupId>
-            <artifactId>itx-rpi-drivers</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-core</artifactId>
             <version>1.2</version>
