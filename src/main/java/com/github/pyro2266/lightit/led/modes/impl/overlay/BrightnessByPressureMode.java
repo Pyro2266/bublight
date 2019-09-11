@@ -19,8 +19,12 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     private float[] hsb = new float[3];
     private float actualBrightness = config.getDefaultBrightness();
 
-    @Autowired
     private PressureService pressureService;
+
+    @Autowired
+    public BrightnessByPressureMode(PressureService pressureService) {
+        this.pressureService = pressureService;
+    }
 
     @Override
     public String getModeId() {

@@ -16,8 +16,12 @@ public class LedController {
 
     private static final Logger LOG = LoggerFactory.getLogger(LedController.class);
 
-    @Autowired
     private LedService ledService;
+
+    @Autowired
+    public LedController(LedService ledService) {
+        this.ledService = ledService;
+    }
 
     @PostMapping(path = "/start")
     public ResponseEntity start() {

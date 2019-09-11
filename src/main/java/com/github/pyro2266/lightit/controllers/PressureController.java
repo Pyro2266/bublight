@@ -19,11 +19,12 @@ public class PressureController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PressureController.class);
 
-    @Autowired
     private PressureService pressureService;
 
     @Autowired
-    private LedService ledService;
+    public PressureController(PressureService pressureService) {
+        this.pressureService = pressureService;
+    }
 
     @GetMapping(path = "/")
     public ResponseEntity getPressure() {

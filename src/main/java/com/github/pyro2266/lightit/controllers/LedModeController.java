@@ -23,17 +23,19 @@ public class LedModeController {
 
     private static final Logger LOG = LoggerFactory.getLogger(LedModeController.class);
 
-    @Autowired
     private LedService ledService;
-
-    @Autowired
     private SimpleColorMode simpleColorMode;
-
-    @Autowired
     private SimpleRainbowMode simpleRainbowMode;
+    private BrightnessByPressureMode brightnessByPressureMode;
 
     @Autowired
-    private BrightnessByPressureMode brightnessByPressureMode;
+    public LedModeController(LedService ledService, SimpleColorMode simpleColorMode,
+            SimpleRainbowMode simpleRainbowMode, BrightnessByPressureMode brightnessByPressureMode) {
+        this.ledService = ledService;
+        this.simpleColorMode = simpleColorMode;
+        this.simpleRainbowMode = simpleRainbowMode;
+        this.brightnessByPressureMode = brightnessByPressureMode;
+    }
 
     @PostMapping(path = "/base/simpleColorMode")
     public ResponseEntity activateSimpleColorMode(@RequestBody SimpleColorModeConfig config) {

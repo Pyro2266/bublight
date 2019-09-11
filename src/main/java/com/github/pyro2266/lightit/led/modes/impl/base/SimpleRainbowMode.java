@@ -1,7 +1,7 @@
 package com.github.pyro2266.lightit.led.modes.impl.base;
 
 import com.github.pyro2266.lightit.led.core.Color;
-import com.github.pyro2266.lightit.led.core.LedService;
+import com.github.pyro2266.lightit.led.core.LedServiceImpl;
 import com.github.pyro2266.lightit.led.modes.api.BaseLedMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class SimpleRainbowMode implements BaseLedMode {
 
     @Override
     public Color[] getNextColors() {
-        Color[] newColors = new Color[LedService.LED_COUNT];
+        Color[] newColors = new Color[LedServiceImpl.LED_COUNT];
         for (int i = 0; i < newColors.length; i++) {
             newColors[i] = new Color(hue, saturation, value);
         }
