@@ -1,4 +1,4 @@
-package com.github.pyro2266.lightit.drivers;
+package com.github.pyro2266.lightit.pressure.driver;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
  * BMP-180 I2C
  * 3.3V Bosch temperature and barometric pressure sensor
  */
-public class BMP180 {
+public class BMP180Driver implements PressureSensor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BMP180.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BMP180Driver.class);
 
     private final static int BIG_ENDIAN = 1;
     private final static int BMP180_ENDIANNESS = BIG_ENDIAN;
@@ -75,11 +75,11 @@ public class BMP180 {
     private int mode = BMP180_STANDARD;
     private int standardSeaLevelPressure = 101325;
 
-    public BMP180() {
+    public BMP180Driver() {
         this(BMP180_ADDRESS);
     }
 
-    public BMP180(int address) {
+    public BMP180Driver(int address) {
         try {
             // Get i2c bus
             I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1); // Depends on the RasPI version
@@ -219,6 +219,7 @@ public class BMP180 {
         return temp;
     }
 
+    @Override
     public float readPressure() throws IOException, InterruptedException {
         // Gets the compensated pressure in pascal
         int UT = 0;
@@ -287,7 +288,7 @@ public class BMP180 {
 
         return p;
     }
-    
+
     public void setStandardSeaLevelPressure(int standardSeaLevelPressure) {
         this.standardSeaLevelPressure = standardSeaLevelPressure;
     }

@@ -1,8 +1,10 @@
 package com.github.pyro2266.lightit.configuration;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties(prefix = "lightit")
 public class LightItConfiguration {
 
     private int ledCount;

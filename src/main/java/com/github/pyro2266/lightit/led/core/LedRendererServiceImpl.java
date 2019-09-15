@@ -6,9 +6,7 @@ import com.github.mbelling.ws281x.Ws281xLedStrip;
 import com.github.pyro2266.lightit.configuration.LightItConfiguration;
 import com.github.pyro2266.lightit.modes.Color;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class LedRendererServiceImpl implements LedRendererService {
 
     private LedStrip strip;
