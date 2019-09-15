@@ -82,10 +82,12 @@ public class BMP180Driver implements PressureSensor {
     public BMP180Driver(int address) {
         try {
             // Get i2c bus
+            LOG.debug("Connecting to bus...");
             I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1); // Depends on the RasPI version
             LOG.debug("Connected to bus. OK.");
 
             // Get device itself
+            LOG.debug("Connecting to device...");
             bmp180 = bus.getDevice(address);
             LOG.debug("Connected to device. OK.");
 
