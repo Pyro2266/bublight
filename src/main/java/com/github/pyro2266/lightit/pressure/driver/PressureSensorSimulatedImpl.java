@@ -18,7 +18,7 @@ public class PressureSensorSimulatedImpl implements PressureSensor {
 
     @Override
     public float readPressure() throws IOException, InterruptedException {
-        return 0;
+        return pressure;
     }
 
     public void setPressure(float pressure) {
