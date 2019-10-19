@@ -26,7 +26,7 @@ public class SimulatedPressureSensorController {
         LOG.info("Starting SIMULATED pressure sensor controller...");
     }
 
-    @PutMapping(path = "/{value}")
+    @PutMapping(path = "/")
     public ResponseEntity activateSimpleRainbowMode(@RequestParam float value) {
         pressureSensorSimulated.setPressure(value);
         return ResponseEntity.ok().build();
