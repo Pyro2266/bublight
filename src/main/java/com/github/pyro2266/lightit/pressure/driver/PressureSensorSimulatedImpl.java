@@ -2,6 +2,8 @@ package com.github.pyro2266.lightit.pressure.driver;
 
 import com.github.pyro2266.lightit.led.core.LedRendererServiceSimulatedImpl;
 import java.io.IOException;
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,8 @@ public class PressureSensorSimulatedImpl implements PressureSensor {
 
     @Override
     public float readPressure() throws IOException, InterruptedException {
-        return pressure;
+        Random random = new Random();
+        return random.nextInt(1000);
     }
 
     public void setPressure(float pressure) {
