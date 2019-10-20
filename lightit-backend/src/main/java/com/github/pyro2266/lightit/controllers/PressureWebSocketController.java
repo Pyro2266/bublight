@@ -22,11 +22,10 @@ public class PressureWebSocketController {
     public PressureWebSocketController(SimpMessagingTemplate template, PressureService pressureService) {
         this.template = template;
         this.pressureService = pressureService;
-        
     }
     
     @MessageMapping("/pressure")
-    public void onReciveMessage(String message) {
+    public void onReceiveMessage(String message) {
         float pressure = 0;
         try {
             pressure = pressureService.getPressure();

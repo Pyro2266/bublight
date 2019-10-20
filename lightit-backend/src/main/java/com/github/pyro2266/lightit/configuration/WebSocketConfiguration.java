@@ -8,12 +8,14 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {    @Override
-public void registerStompEndpoints(StompEndpointRegistry registry) {
-    registry.addEndpoint("/socket")
-            .setAllowedOrigins("*")
-            .withSockJS();
-}
+public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/socket")
+                .setAllowedOrigins("*")
+                .withSockJS();
+    }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
