@@ -8,3 +8,4 @@ projectName.iml
 /build
 /local.properties
 target/
+lightit-webapp/src/main/angular/lightit-webapp/node/
