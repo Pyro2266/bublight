@@ -10,7 +10,15 @@
 
     <modules>
         <module>lightit-backend</module>
-        <module>lightit-webapp</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>build-web</id>
+            <modules>
+                <module>lightit-webapp</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
