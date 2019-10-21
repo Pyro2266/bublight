@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lightita": {
+    "lightit-webapp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lightita",
+            "outputPath": "dist/lightit-webapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lightita:build"
+            "browserTarget": "lightit-webapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lightita:build:production"
+              "browserTarget": "lightit-webapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lightita:build"
+            "browserTarget": "lightit-webapp:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "lightita:serve"
+            "devServerTarget": "lightit-webapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "lightita:serve:production"
+              "devServerTarget": "lightit-webapp:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "lightita"
+  "defaultProject": "lightit-webapp"
 }
