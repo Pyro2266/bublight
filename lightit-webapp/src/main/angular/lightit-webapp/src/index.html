@@ -12,7 +12,8 @@
 	<base href="/">
 	
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	  <link href="assets/css/switchery.min.css" rel="stylesheet" />
 	<link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 <body class="dark-edition">
@@ -31,6 +32,16 @@
 	<script src="assets/js/core/bootstrap-material-design.min.js"></script>
 	<script src="https://unpkg.com/default-passive-events"></script>
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script src="assets/js/switchery.min.js"></script>
 	<script src="assets/js/material-dashboard.js?v=2.1.0"></script>
+
+	<script>
+
+		$(function() {
+			var elem = document.querySelector('.js-switch');
+			var switchery = new Switchery(elem, { size: 'small' });
+		});
+
+	</script>
 </body>
 </html>

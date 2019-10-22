@@ -9,6 +9,7 @@ export class GraphComponent {
     @Input('title') title: string
     @Input('subtitle') subtitle: string
     @Input('value') value: string
+    @Input('pressureArray') pressureArray: []
 
     chart_labels = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
     chart = null
@@ -92,8 +93,8 @@ export class GraphComponent {
     }
 
     ngOnChanges() {
-        this.config.data.datasets[0].data.push(parseFloat(this.value))
-        this.config.data.datasets[0].data.shift()
+        this.config.data.datasets[0].data = this.pressureArray;
+        //this.config.data.datasets[0].data.shift()
         if(this.chart != null)
             this.chart.update()
     }
