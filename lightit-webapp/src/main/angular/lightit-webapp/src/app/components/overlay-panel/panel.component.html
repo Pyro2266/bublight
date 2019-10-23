@@ -1,6 +1,10 @@
 <div class="card">
     <div class="card-header card-header-info">
         <h4 class="card-title">Pressure By Brightness</h4>
+        <div class="card-toolbar">
+            <label class="swithLabel">Switch mode:</label>
+            <input (change)="enablePressureMode($event)" type="checkbox" class="js-switch" /> 
+        </div>
     </div>
     <div class="card-body">
         <div class="form-group">

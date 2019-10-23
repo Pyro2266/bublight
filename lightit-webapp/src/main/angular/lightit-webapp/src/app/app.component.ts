@@ -13,10 +13,11 @@ export class AppComponent {
   title = 'LightIT'
   stompClient;
   pressure = 0
+  pressureArray = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 
   constructor(private http: HttpClient){
     this.initializeWebSocketConnection()
-    this.http.post("http://localhost:8080/led/setRefreshRate/200", {}).subscribe();
+    this.http.post("http://localhost:8080/led/setRefreshRate/500", {}).subscribe();
   }
 
   initializeWebSocketConnection(){
@@ -25,7 +26,11 @@ export class AppComponent {
     let that = this
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/pressureSubscribe", (message) => {
-        that.pressure = Math.round(message.body)
+        const pressure = (Math.round(message.body)*(-1))
+        that.pressure = pressure
+        that.pressureArray.push(pressure)
+        that.pressureArray.shift()        
+        that.pressureArray = that.pressureArray.slice()
       });
     });
   }
