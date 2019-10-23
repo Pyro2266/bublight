@@ -141,7 +141,7 @@ public class BMP180Driver implements PressureSensor {
         return (hi << 8) + lo;
     }
 
-    public void readCalibrationData() {
+    public synchronized void readCalibrationData() {
         // Reads the calibration data from the IC
         cal_AC1 = readS16(BMP180_CAL_AC1);   // INT16
         cal_AC2 = readS16(BMP180_CAL_AC2);   // INT16
@@ -203,7 +203,7 @@ public class BMP180Driver implements PressureSensor {
         return raw;
     }
 
-    public float readTemperature() throws IOException, InterruptedException {
+    public synchronized float readTemperature() throws IOException, InterruptedException {
         // Gets the compensated temperature in degrees celsius
         int UT = 0;
         int X1 = 0;
@@ -222,7 +222,7 @@ public class BMP180Driver implements PressureSensor {
     }
 
     @Override
-    public float readPressure() throws IOException, InterruptedException {
+    public synchronized float readPressure() throws IOException, InterruptedException {
         // Gets the compensated pressure in pascal
         int UT = 0;
         int UP = 0;
@@ -286,12 +286,12 @@ public class BMP180Driver implements PressureSensor {
         LOG.trace("X2 = " + X2);
         
         p = p + ((X1 + X2 + 3791) >> 4);
-        LOG.trace("Pressure = " + p + " Pa");
+        LOG.debug("Pressure = " + p + " Pa");
 
         return p;
     }
 
-    public void setStandardSeaLevelPressure(int standardSeaLevelPressure) {
+    public synchronized void setStandardSeaLevelPressure(int standardSeaLevelPressure) {
         this.standardSeaLevelPressure = standardSeaLevelPressure;
     }
 
