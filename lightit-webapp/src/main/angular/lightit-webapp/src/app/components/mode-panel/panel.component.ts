@@ -22,8 +22,8 @@ export class ModePanelComponent {
     colors = []
 
     constructor(private http: HttpClient) {
-        this.http.get("http://127.0.0.1:8080/mode/base/simpleColorMode/").subscribe((data: any) => this.colors = data["colors"])
-        this.http.get("http://127.0.0.1:8080/mode/base/simpleRainbowMode").subscribe((data: any) => this.step = data["step"])
+        this.http.get(window.location.origin+"/mode/base/simpleColorMode/").subscribe((data: any) => this.colors = data["colors"])
+        this.http.get(window.location.origin+"/mode/base/simpleRainbowMode").subscribe((data: any) => this.step = data["step"])
 
         for(var i = 0; i < 16; i++) {
             this.colors.push({
@@ -69,10 +69,10 @@ export class ModePanelComponent {
     modeSwitch(mode: number) {
         switch(mode) {
             case 0:
-                this.http.post("http://127.0.0.1:8080/mode/base/simpleColorMode", this.colors, this.httpOptions).subscribe();
+                this.http.post(window.location.origin+"/mode/base/simpleColorMode", this.colors, this.httpOptions).subscribe();
                 break;
             case 1:
-                this.http.post("http://127.0.0.1:8080/mode/base/simpleRainbowMode", {
+                this.http.post(window.location.origin+"/mode/base/simpleRainbowMode", {
                     "step": this.step
                 }, this.httpOptions).subscribe();
                 break;

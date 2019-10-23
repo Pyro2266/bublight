@@ -16,7 +16,7 @@ export class OverlayPanelComponent {
     maxStep: number = 0.07
 
     constructor(private http: HttpClient) { 
-        this.http.get("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode").subscribe((data: any) => {
+        this.http.get(window.location.origin+"/mode/overlay/brightnessByPressureMode").subscribe((data: any) => {
             this.positivePressureRange = data["positivePressureRange"]
             this.negativePressureRange = data["negativePressureRange"]
             this.defaultBrightness = data["defaultBrightness"]
@@ -39,11 +39,11 @@ export class OverlayPanelComponent {
         var switchEl = $(event.target)
         
         if(switchEl.is(":checked")) {
-            this.http.post("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode", this.options).subscribe();
+            this.http.post(window.location.origin+"/mode/overlay/brightnessByPressureMode", this.options).subscribe();
         }
     }
 
     updatePressureMode() {
-        this.http.post("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode", this.options).subscribe();
+        this.http.post(window.location.origin+"/mode/overlay/brightnessByPressureMode", this.options).subscribe();
     }
 }

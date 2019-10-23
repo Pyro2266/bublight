@@ -91,7 +91,6 @@ export class GraphComponent {
 
     ngOnChanges() {
         this.config.data.datasets[0].data = this.pressureArray;
-        //this.config.data.datasets[0].data.shift()
         if(this.chart != null)
             this.chart.update()
     }
