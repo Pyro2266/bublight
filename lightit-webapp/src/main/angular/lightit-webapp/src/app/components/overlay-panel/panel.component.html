@@ -9,27 +9,28 @@
     <div class="card-body">
         <div class="form-group">
             <label for="positivePressureRange" class="control-label">Positive Pressure Range:</label>
-            <input name="positivePressureRange" max="1000" min="0" step="1" value="800" type="number" class="form-control" />
+            <input [(ngModel)]="positivePressureRange" name="positivePressureRange" max="1000" min="0" step="1" value="800" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label for="negativePressureRange" class="control-label">Negative Pressure Range:</label>
-            <input name="negativePressureRange" max="1000" min="0" step="1" value="500" type="number" class="form-control" />
+            <input [(ngModel)]="negativePressureRange" name="negativePressureRange" max="1000" min="0" step="1" value="500" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label for="defaultBrightness" class="control-label">Default Brightness:</label>
-            <input name="defaultBrightness" max="1" min="0.1" step="01" value="0.2" type="number" class="form-control" />
+            <input [(ngModel)]="defaultBrightness" name="defaultBrightness" max="1" min="0.1" step="01" value="0.2" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label for="minBrightness" class="control-label">Min Brightness:</label>
-            <input name="minBrightness" max="1" min="0.01" step="0.01" value="0.01" type="number" class="form-control" />
+            <input [(ngModel)]="minBrightness" name="minBrightness" max="1" min="0.01" step="0.01" value="0.01" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label for="maxBrightness" class="control-label">Max Brightness:</label>
-            <input name="maxBrightness" max="1" min="0.01" step="0.01" value="0.05" type="number" class="form-control" />
+            <input [(ngModel)]="maxBrightness" name="maxBrightness" max="1" min="0.01" step="0.01" value="0.05" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label for="maxStep" class="control-label">Max Step:</label>
-            <input name="maxStep" max="1" min="0.01" step="0.01" value="0.07" type="number" class="form-control" />
+            <input [(ngModel)]="maxStep" name="maxStep" max="1" min="0.01" step="0.01" value="0.07" type="number" class="form-control" />
         </div>
+        <button (click)="updatePressureMode()" class="btn btn-info btn-sm">Update</button>
     </div>
 </div>

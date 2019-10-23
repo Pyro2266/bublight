@@ -1,8 +1,8 @@
-import { Output, Component, EventEmitter } from '@angular/core';
+import { Output, Component, EventEmitter, ElementRef, Input } from '@angular/core';
 
 @Component({
   selector: 'color-node',
-  styles: ['.color-nodes-list { padding: 10px; }', '.color-node { padding: 5px; width: 20px; height: 20px; border-radius: 50%; background-color: #FFF; float: left; margin-right: 10px; }'],
+  styles: ['.color-nodes-list { padding: 10px; }', '.color-node { padding: 5px; width: 20px; height: 20px; border-radius: 50%; background-color: #FFF; float: left; margin-right: 10px; cursor:pointer; }'],
   template: `
     <div [style.background]="color"
     [cpPosition]="'top'"
@@ -13,12 +13,18 @@ import { Output, Component, EventEmitter } from '@angular/core';
     [(colorPicker)]="color" class="color-node"></div>`
 })
 export class ColorNodeComponent {
-    color: string
-    @Output() onSelectValue = new EventEmitter<{ color: string }>()
+    @Input('color') color: string = "#FFFFFF"
+    @Output() onSelectValue = new EventEmitter<any>()
+
+    constructor(private elementRef: ElementRef) { }
+
+    public get target(): HTMLElement {
+        return this.elementRef.nativeElement as HTMLElement;
+    }
 
     colorPickerChange( value: string ) {
         this.color = value
         if (this.color != undefined)
-            this.onSelectValue.emit( { color: this.color } )
+            this.onSelectValue.emit(this)
     }
 }

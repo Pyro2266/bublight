@@ -11,22 +11,12 @@ export class GraphComponent {
     @Input('value') value: string
     @Input('pressureArray') pressureArray: []
 
-    chart_labels = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+    chart_labels = []
     chart = null
-    gradientChartOptionsConfigurationWithTooltipBlue =  {
+    options =  {
         maintainAspectRatio: false,
         legend: {
               display: false
-        },
-        tooltips: {
-           backgroundColor: '#f5f5f5',
-           titleFontColor: '#333',
-           bodyFontColor: '#666',
-           bodySpacing: 4,
-           xPadding: 12,
-           mode: "nearest",
-           intersect: 0,
-           position: "nearest"
         },
         responsive: true,
         scales:{
@@ -63,7 +53,7 @@ export class GraphComponent {
     config = {
         type: 'line',
         data: {
-            labels: this.chart_labels,
+            labels: [],
             datasets: [{                
                 fill: true,
                 borderColor: '#1d8cf8',
@@ -80,7 +70,14 @@ export class GraphComponent {
                 data: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
             }]
         },
-        options: this.gradientChartOptionsConfigurationWithTooltipBlue
+        options: this.options
+    }
+
+    constructor() {
+        for(var i = 0; i < 50; i++) {
+            this.config.data.labels.push(i)
+        }
+        Chart.defaults.global.tooltips.enabled = false;
     }
 
     createChart() {

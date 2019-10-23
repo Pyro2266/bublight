@@ -8,8 +8,23 @@ import $ from 'jquery';
     styles: ['.card-title { float:left }', '.card-toolbar { float: right; }', '.swithLabel { color:#FFF; margin-right:10px; }'],
 })
 export class OverlayPanelComponent {
+    positivePressureRange: number = 800
+    negativePressureRange: number = 500
+    defaultBrightness: number = 0.2
+    minBrightness: number = 0.01
+    maxBrightness: number = 0.5
+    maxStep: number = 0.07
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        this.http.get("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode").subscribe((data: any) => {
+            this.positivePressureRange = data["positivePressureRange"]
+            this.negativePressureRange = data["negativePressureRange"]
+            this.defaultBrightness = data["defaultBrightness"]
+            this.minBrightness = data["minBrightness"]
+            this.maxBrightness = data["maxBrightness"]
+            this.maxStep = data["maxStep"]
+        })
+    }
 
     options = {
         "positivePressureRange": 800,
@@ -24,7 +39,11 @@ export class OverlayPanelComponent {
         var switchEl = $(event.target)
         
         if(switchEl.is(":checked")) {
-            this.http.post("http://localhost:8080/mode/overlay/brightnessByPressureMode", this.options).subscribe();
+            this.http.post("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode", this.options).subscribe();
         }
+    }
+
+    updatePressureMode() {
+        this.http.post("http://127.0.0.1:8080/mode/overlay/brightnessByPressureMode", this.options).subscribe();
     }
 }

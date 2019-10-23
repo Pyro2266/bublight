@@ -4,14 +4,14 @@
             <div class="nav-tabs-wrapper">
                 <span class="nav-tabs-title">Modes:</span>
                 <ul class="nav nav-tabs" data-tabs="tabs">
-                    <li (click)="modeSwitch($event, 0)" class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active show" href="#simpleColor" data-toggle="tab">
                             <i class="material-icons">color_lens</i> Simple Color
                             <div class="ripple-container"></div>
                             <div class="ripple-container"></div>
                         </a>
                     </li>
-                    <li (click)="modeSwitch($event, 1)" class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="#rainbow" data-toggle="tab">
                             <i class="material-icons">toys</i> Rainbow
                             <div class="ripple-container"></div>
@@ -26,29 +26,33 @@
         <div class="tab-content">
             <div class="tab-pane active show" id="simpleColor">
                 <div class="color-nodes-list">
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>
-                    <color-node (onSelectValue)='selectValue($event)'></color-node>                    
-                </div>
+                    <color-node data-index="0" [color]="RGBToHex(colors[0])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="1" [color]="RGBToHex(colors[1])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="2" [color]="RGBToHex(colors[2])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="3" [color]="RGBToHex(colors[3])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="4" [color]="RGBToHex(colors[4])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="5" [color]="RGBToHex(colors[5])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="6" [color]="RGBToHex(colors[6])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="7" [color]="RGBToHex(colors[7])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="8" [color]="RGBToHex(colors[8])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="9" [color]="RGBToHex(colors[9])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="10" [color]="RGBToHex(colors[10])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="11" [color]="RGBToHex(colors[11])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="12" [color]="RGBToHex(colors[12])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="13" [color]="RGBToHex(colors[13])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="14" [color]="RGBToHex(colors[14])" (onSelectValue)='selectValue($event)'></color-node>
+                    <color-node data-index="15" [color]="RGBToHex(colors[15])" (onSelectValue)='selectValue($event)'></color-node>                    
+                </div>                
+                <br />
+                <hr style="background-color: rgba(180, 180, 180, 0.2)" />
+                <button (click)="modeSwitch(0)" class="btn btn-info btn-sm">Activate</button>
             </div>
             <div class="tab-pane" id="rainbow">
                 <div class="form-group">
                     <label for="step" class="control-label">Step:</label>
-                    <input name="step" max="1" min="0.0001" step="0.0001" value="0.0005" type="number" class="form-control" />
+                    <input [(ngModel)]="step" name="step" max="1" min="0.0001" step="0.0001" value="0.0005" type="number" class="form-control" />
                 </div>
+                <button (click)="modeSwitch(1)" class="btn btn-info btn-sm">Activate</button>
             </div>
         </div>
     </div>

@@ -9,20 +9,24 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  serverUrl = 'http://localhost:8080/socket'
+  serverUrl = 'http://127.0.0.1:8080/socket'
   title = 'LightIT'
   stompClient;
   pressure = 0
-  pressureArray = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  pressureArray = []
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient){    
+    for(var i = 0; i < 50; i++) {
+      this.pressureArray.push(0)
+    }
+
     this.initializeWebSocketConnection()
-    this.http.post("http://localhost:8080/led/setRefreshRate/500", {}).subscribe();
   }
 
   initializeWebSocketConnection(){
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws)
+    this.stompClient.debug = null
     let that = this
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/pressureSubscribe", (message) => {
