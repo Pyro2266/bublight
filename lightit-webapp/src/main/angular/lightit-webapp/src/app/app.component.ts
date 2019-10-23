@@ -9,7 +9,7 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  serverUrl = 'http://127.0.0.1:8080/socket'
+  serverUrl = window.location.origin+'/socket'
   title = 'LightIT'
   stompClient;
   pressure = 0

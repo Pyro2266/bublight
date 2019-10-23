@@ -16,9 +16,9 @@ export class LedPanelComponent {
         var switchEl = $(event.target)
         
         if(switchEl.is(":checked"))
-            this.http.post("http://127.0.0.1:8080/led/start", {}).subscribe();
+            this.http.post(window.location.origin+"/led/start", {}).subscribe();
         else
-            this.http.post("http://127.0.0.1:8080/led/stop", {}).subscribe();
+            this.http.post(window.location.origin+"/led/stop", {}).subscribe();
         
     }
 }
