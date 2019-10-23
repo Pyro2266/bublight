@@ -39,7 +39,15 @@
 
 		$(function() {
 			var elem = document.querySelector('.js-switch');
-			var switchery = new Switchery(elem, { size: 'small' });
+			var switchery = new Switchery(elem, { 
+				size: 'small' ,
+				color: '#202940'
+			});
+
+			var ledSwitch = document.querySelector('.led-switch');
+			var switchery = new Switchery(ledSwitch, { 
+				color: '#25b1c3'
+			});
 		});
 
 	</script>
