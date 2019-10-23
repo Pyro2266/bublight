@@ -69,7 +69,7 @@ export class ModePanelComponent {
     modeSwitch(mode: number) {
         switch(mode) {
             case 0:
-                this.http.post(window.location.origin+"/mode/base/simpleColorMode", this.colors, this.httpOptions).subscribe();
+                this.http.post(window.location.origin+"/mode/base/simpleColorMode", {"colors": this.colors}, this.httpOptions).subscribe();
                 break;
             case 1:
                 this.http.post(window.location.origin+"/mode/base/simpleRainbowMode", {
