@@ -16,8 +16,7 @@ export class AppComponent {
   pressureArray = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 
   constructor(private http: HttpClient){
-    this.initializeWebSocketConnection()
-    this.http.post("http://localhost:8080/led/setRefreshRate/500", {}).subscribe();
+    this.initializeWebSocketConnection();
   }
 
   initializeWebSocketConnection(){
@@ -29,7 +28,7 @@ export class AppComponent {
         const pressure = (Math.round(message.body)*(-1))
         that.pressure = pressure
         that.pressureArray.push(pressure)
-        that.pressureArray.shift()        
+        that.pressureArray.shift()
         that.pressureArray = that.pressureArray.slice()
       });
     });
