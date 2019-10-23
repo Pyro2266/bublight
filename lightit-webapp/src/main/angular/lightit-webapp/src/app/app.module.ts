@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PressurePanelComponent } from './components/pressure-panel/panel.component'
 import { LedPanelComponent } from './components/led-panel/panel.component'
+import { MusicPanelComponent } from './components/music-panel/panel.component'
 import { ModePanelComponent } from './components/mode-panel/panel.component'
 import { GraphComponent } from './components/graph/graph.component'
 import { OverlayPanelComponent } from './components/overlay-panel/panel.component'
@@ -21,7 +22,8 @@ import { ColorNodeComponent } from './components/mode-panel/color-node.component
     GraphComponent,
     ColorNodeComponent,
     OverlayPanelComponent,
-    LedPanelComponent
+    LedPanelComponent,
+    MusicPanelComponent
   ],
   imports: [
     BrowserModule,
