@@ -1,14 +1,15 @@
 package com.github.pyro2266.lightit.pressure;
 
 import com.github.pyro2266.lightit.pressure.driver.PressureSensor;
-import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PressureServiceImpl implements PressureService {
 
     private static final Logger LOG = LoggerFactory.getLogger(PressureServiceImpl.class);
@@ -16,16 +17,13 @@ public class PressureServiceImpl implements PressureService {
     private static final int NUMBER_OF_ITERATIONS_OF_CALIBRATION = 10;
 
     private PressureSensor pressureSensor;
-    private Set<OnPressureDiffReadEvent> onPressureDiffReadEvents;
     private float normalPressure = 0;
 
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
     @Autowired
-    public PressureServiceImpl(PressureSensor pressureSensor,
-            Set<OnPressureDiffReadEvent> onPressureDiffReadEvents) {
+    public PressureServiceImpl(PressureSensor pressureSensor) {
         this.pressureSensor = pressureSensor;
-        this.onPressureDiffReadEvents = onPressureDiffReadEvents;
     }
 
     @PostConstruct
@@ -52,9 +50,7 @@ public class PressureServiceImpl implements PressureService {
 
     @Override
     public float getPressureDifference() throws PressureException {
-        float pressureDiff = normalPressure - getPressure();
-        onPressureDiffReadEvents.forEach(onPressureDiffReadEvent -> onPressureDiffReadEvent.execute(pressureDiff));
-        return pressureDiff;
+        return normalPressure - getPressure();
     }
 
     @Override

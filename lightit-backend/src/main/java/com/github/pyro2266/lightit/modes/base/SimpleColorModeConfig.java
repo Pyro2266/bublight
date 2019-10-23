@@ -1,6 +1,7 @@
 package com.github.pyro2266.lightit.modes.base;
 
-import com.github.pyro2266.lightit.led.core.LedRendererServiceImpl;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.pyro2266.lightit.modes.Color;
 import java.util.Arrays;
 
@@ -8,7 +9,8 @@ public class SimpleColorModeConfig {
 
     private Color[] colors;
 
-    public SimpleColorModeConfig(Color[] colors) {
+    @JsonCreator
+    public SimpleColorModeConfig(@JsonProperty("colors") Color[] colors) {
         this.colors = colors;
     }
 

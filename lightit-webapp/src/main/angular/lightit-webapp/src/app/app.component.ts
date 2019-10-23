@@ -33,7 +33,7 @@ export class AppComponent {
         const pressure = (Math.round(message.body)*(-1))
         that.pressure = pressure
         that.pressureArray.push(pressure)
-        that.pressureArray.shift()        
+        that.pressureArray.shift()
         that.pressureArray = that.pressureArray.slice()
       });
     });
