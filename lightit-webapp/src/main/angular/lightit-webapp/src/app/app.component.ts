@@ -15,7 +15,7 @@ export class AppComponent {
   pressure = 0
   pressureArray = []
 
-  constructor(private http: HttpClient){    
+  constructor(private http: HttpClient){
     for(var i = 0; i < 50; i++) {
       this.pressureArray.push(0)
     }
@@ -30,7 +30,7 @@ export class AppComponent {
     let that = this
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe("/pressureSubscribe", (message) => {
-        const pressure = (Math.round(message.body)*(-1))
+        const pressure = (Math.round(message.body))
         that.pressure = pressure
         that.pressureArray.push(pressure)
         that.pressureArray.shift()
