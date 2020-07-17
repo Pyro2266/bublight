@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @ConditionalOnProperty(value="lightit.simulatedMode", havingValue = "true")
 public class SimulatedPressureSensorController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PressureSensorSimulatedImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimulatedPressureSensorController.class);
 
     private PressureSensorSimulatedImpl pressureSensorSimulated;
 
