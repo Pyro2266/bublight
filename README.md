@@ -24,6 +24,14 @@ and include it in final `.jar` file.
 `curl -X POST http://localhost:8080/pressure/simulated/<INTEGER_PRESSURE_VALUE>`
 6. Play with it!
 
+## Connection schema
+Components used in demo:
+- Raspberry Zero W 1.1
+- GY-68 (BMP180)
+- Adafruit Neopixel Ring (16x LED)
+
+![screenshot](./docs/schema.bmp)
+
 ## Screenshot
 To give an idea how does it look - but it may and will change since it's still under development.
 ![screenshot](./docs/lightit-screenshot.png)
