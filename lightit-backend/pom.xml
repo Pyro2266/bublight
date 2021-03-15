@@ -12,7 +12,7 @@
 
     <groupId>com.github.pyro2266.lightit</groupId>
     <artifactId>lightit-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
