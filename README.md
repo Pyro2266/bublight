@@ -18,7 +18,7 @@ Steps:
 `mvn clean install -P build-web`. Profile `build-web` will build both backend and frontend
 and include it in final `.jar` file.
 2. Go to the target directory: `cd lighty-backend/target`
-3. Start `.jar` file in a simulated mode: `java -jar lightit-backend-0.0.1.jar --lightit.simulatedMode=true`
+3. Start `.jar` file in a simulated mode: `java -jar lightit-backend-0.0.2-SNAPSHOT.jar --lightit.simulatedMode=true`
 4. Open `localhost:8080` in your browser
 5. You can try to set simulated pressure value with REST POST request:
 `curl -X POST http://localhost:8080/pressure/simulated/<INTEGER_PRESSURE_VALUE>`

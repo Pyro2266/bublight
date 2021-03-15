@@ -5,7 +5,7 @@
 
     <groupId>com.github.pyro2266.lightit</groupId>
     <artifactId>lightit-webapp</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
 
     <profiles>
         <profile>
