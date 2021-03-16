@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @ConditionalOnProperty(value="lightit.simulatedMode", havingValue = "true")
 public class SimulatedPressureSensorController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PressureSensorSimulatedImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimulatedPressureSensorController.class);
 
     private PressureSensorSimulatedImpl pressureSensorSimulated;
 
@@ -24,9 +24,10 @@ public class SimulatedPressureSensorController {
         LOG.info("Starting SIMULATED pressure sensor controller...");
     }
 
-    @PutMapping(path = "/")
-    public ResponseEntity activateSimpleRainbowMode(@RequestParam float value) {
-        pressureSensorSimulated.setPressure(value);
+    @PostMapping(path = "/{value}")
+    public ResponseEntity setSimulatedPressureValue(@PathVariable float value) {
+        // set negative value - otherwise graph will be inverted
+        pressureSensorSimulated.setPressure(-value);
         return ResponseEntity.ok().build();
     }
 }

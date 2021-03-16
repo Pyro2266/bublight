@@ -32,7 +32,7 @@ public class LightItBeanConfiguration {
     @Bean
     public PressureSensor pressureSensor() {
         if (lightItConfiguration.isSimulatedMode()) {
-            return new PressureSensorSimulatedImpl(1000);
+            return new PressureSensorSimulatedImpl(0);
         } else {
             return new BMP180Driver();
         }
