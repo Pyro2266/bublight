@@ -1,7 +1,6 @@
 package com.github.pyro2266.bublight.led.core;
 
 import com.github.pyro2266.bublight.modes.Color;
-import com.github.pyro2266.bublight.modes.ColorModesProcessorImpl;
 import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

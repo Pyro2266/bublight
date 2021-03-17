@@ -1,9 +1,8 @@
-package com.github.pyro2266.bublight.modes.base;
+package com.github.pyro2266.bublight.modes.base.simplecolor;
 
 import com.github.pyro2266.bublight.configuration.BubLightConfiguration;
-import com.github.pyro2266.bublight.led.core.LedRendererServiceImpl;
-import com.github.pyro2266.bublight.modes.Color;
 import com.github.pyro2266.bublight.modes.BaseLedMode;
+import com.github.pyro2266.bublight.modes.Color;
 import com.github.pyro2266.bublight.modes.LedModeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +15,10 @@ public class SimpleColorMode implements BaseLedMode {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleColorMode.class);
     private static final String MODE_ID = "Simple";
 
-    private BubLightConfiguration bubLightConfiguration;
-
     private SimpleColorModeConfig config;
 
     @Autowired
     public SimpleColorMode(BubLightConfiguration bubLightConfiguration) {
-        this.bubLightConfiguration = bubLightConfiguration;
 
         Color[] colors = new Color[bubLightConfiguration.getLedCount()];
         for (int i = 0; i < colors.length; i++) {

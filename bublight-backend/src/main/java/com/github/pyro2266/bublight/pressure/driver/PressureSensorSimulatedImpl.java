@@ -1,14 +1,12 @@
 package com.github.pyro2266.bublight.pressure.driver;
 
-import com.github.pyro2266.bublight.led.core.LedRendererServiceSimulatedImpl;
 import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PressureSensorSimulatedImpl implements PressureSensor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LedRendererServiceSimulatedImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PressureSensorSimulatedImpl.class);
 
     private float pressure;
 

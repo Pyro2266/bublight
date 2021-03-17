@@ -1,9 +1,8 @@
-package com.github.pyro2266.bublight.modes.base;
+package com.github.pyro2266.bublight.modes.base.simplerainbow;
 
 import com.github.pyro2266.bublight.configuration.BubLightConfiguration;
-import com.github.pyro2266.bublight.led.core.LedRendererServiceImpl;
-import com.github.pyro2266.bublight.modes.Color;
 import com.github.pyro2266.bublight.modes.BaseLedMode;
+import com.github.pyro2266.bublight.modes.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class SimpleRainbowMode implements BaseLedMode {
     private static final String MODE_ID = "Simple rainbow";
     private static final int MAX_HUE = 1;
 
-    private BubLightConfiguration bubLightConfiguration;
+    private final BubLightConfiguration bubLightConfiguration;
 
     private float hue = 0;
     private float saturation = 1;

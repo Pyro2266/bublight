@@ -1,4 +1,4 @@
-package com.github.pyro2266.bublight.modes.base;
+package com.github.pyro2266.bublight.modes.base.simplerainbow;
 
 public class SimpleRainbowModeConfig {
 
