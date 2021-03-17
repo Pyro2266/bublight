@@ -8,7 +8,7 @@ projectName.iml
 /build
 /local.properties
 target/
-lightit-webapp/src/main/angular/lightit-webapp/node/
+bublight-webapp/src/main/angular/bublight-webapp/node/
 
 # Eclipse gitignore
 .metadata
