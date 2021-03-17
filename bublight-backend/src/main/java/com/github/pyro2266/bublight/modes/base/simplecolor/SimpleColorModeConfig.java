@@ -1,4 +1,4 @@
-package com.github.pyro2266.bublight.modes.base;
+package com.github.pyro2266.bublight.modes.base.simplecolor;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

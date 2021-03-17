@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BubLightBeanConfiguration {
 
-    private BubLightConfiguration bubLightConfiguration;
+    private final BubLightConfiguration bubLightConfiguration;
 
     @Autowired
     public BubLightBeanConfiguration(BubLightConfiguration bubLightConfiguration) {

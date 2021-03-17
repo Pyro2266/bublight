@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/pressure/websocket")
 public class PressureWebsocketController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LedController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PressureWebsocketController.class);
 
-    private PressureWebsocketService pressureWebsocketService;
+    private final PressureWebsocketService pressureWebsocketService;
 
     @Autowired
     public PressureWebsocketController(PressureWebsocketService pressureWebsocketService) {

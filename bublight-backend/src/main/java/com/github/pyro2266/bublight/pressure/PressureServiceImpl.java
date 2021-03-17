@@ -16,10 +16,10 @@ public class PressureServiceImpl implements PressureService {
     private static final int DURATION_OF_CALIBRATION = 2000;
     private static final int NUMBER_OF_ITERATIONS_OF_CALIBRATION = 10;
 
-    private PressureSensor pressureSensor;
+    private final PressureSensor pressureSensor;
     private float normalPressure = 0;
 
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private ReadWriteLock lock = new ReentrantReadWriteLock(); // TODO replace with synchronized
 
     @Autowired
     public PressureServiceImpl(PressureSensor pressureSensor) {

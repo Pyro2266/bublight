@@ -16,8 +16,8 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
 
     private static final Logger LOG = LoggerFactory.getLogger(ColorModesProcessorImpl.class);
 
-    private LedRendererService ledRenderer;
-    private BubLightConfiguration bubLightConfiguration;
+    private final LedRendererService ledRenderer;
+    private final BubLightConfiguration bubLightConfiguration;
 
     private Color[] colors;
     private BaseLedMode baseLedMode;

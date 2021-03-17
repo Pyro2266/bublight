@@ -15,11 +15,12 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     private static final Logger LOG = LoggerFactory.getLogger(BrightnessByPressureMode.class);
     private static final String MODE_ID = "Brightness by pressure";
 
+    private final PressureService pressureService;
+
+    private final float[] hsb = new float[3];
     private BrightnessByPressureModeConfig config = new BrightnessByPressureModeConfig();
-    private float[] hsb = new float[3];
     private float actualBrightness = config.getDefaultBrightness();
 
-    private PressureService pressureService;
 
     @Autowired
     public BrightnessByPressureMode(PressureService pressureService) {
@@ -35,7 +36,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                // TODO refactor...
+                // TODO refactor... hah, it's nearly three years now
                 float pressureDif = pressureService.getPressureDifference();
 
                 float brightnessDelta;

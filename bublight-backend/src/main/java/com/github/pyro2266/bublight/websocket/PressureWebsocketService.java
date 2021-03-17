@@ -19,12 +19,13 @@ public class PressureWebsocketService {
 
     private static final Logger LOG = LoggerFactory.getLogger(PressureWebsocketService.class);
 
-    public final String PRESSURE_DIFF_WEBSOCKET_ENDPOINT = "/pressureSubscribe";
-    public final int DEFAULT_REFRESH_RATE = 200;
+    private static final String PRESSURE_DIFF_WEBSOCKET_ENDPOINT = "/pressureSubscribe";
+    private static final int DEFAULT_REFRESH_RATE = 200;
 
     private final SimpMessagingTemplate template;
     private final PressureService pressureService;
-    private ScheduledExecutorService executorService;
+    private final ScheduledExecutorService executorService;
+
     private ScheduledFuture scheduledFuture = null;
 
     @Autowired

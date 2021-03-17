@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class LedRendererServiceImpl implements LedRendererService {
 
-    private LedStrip strip;
+    private final LedStrip strip;
 
     @Autowired
     public LedRendererServiceImpl(BubLightConfiguration bubLightConfiguration) {
