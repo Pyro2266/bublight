@@ -1,8 +1,7 @@
 package com.github.pyro2266.bublight.pressure;
 
 import com.github.pyro2266.bublight.pressure.driver.PressureSensor;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.io.IOException;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +17,7 @@ public class PressureServiceImpl implements PressureService {
 
     private final PressureSensor pressureSensor;
     private float normalPressure = 0;
-
-    private ReadWriteLock lock = new ReentrantReadWriteLock(); // TODO replace with synchronized
+    private float cachedPressure = 0;
 
     @Autowired
     public PressureServiceImpl(PressureSensor pressureSensor) {
@@ -36,21 +34,29 @@ public class PressureServiceImpl implements PressureService {
     }
 
     @Override
-    public float getPressure() throws PressureException {
+    public synchronized float getPressure() throws PressureException {
         try {
-            lock.readLock().lock();
-            return pressureSensor.readPressure();
-        } catch (Exception e) {
+            cachedPressure = pressureSensor.readPressure();
+            return cachedPressure;
+        } catch (InterruptedException | IOException e) {
             LOG.error("Unable to read pressure!", e);
             throw new PressureException("Unable to read pressure!", e);
-        } finally {
-            lock.readLock().unlock();
         }
     }
 
     @Override
     public float getPressureDifference() throws PressureException {
         return normalPressure - getPressure();
+    }
+
+    @Override
+    public float getCachedPressure() {
+        return cachedPressure;
+    }
+
+    @Override
+    public float getCachedPressureDifference() {
+        return normalPressure - cachedPressure;
     }
 
     @Override
@@ -62,12 +68,12 @@ public class PressureServiceImpl implements PressureService {
                 LOG.debug("Calibrating pressure. Iteration {}. Pressure {}.", i, pressure);
                 sum += pressure;
                 Thread.sleep(DURATION_OF_CALIBRATION / NUMBER_OF_ITERATIONS_OF_CALIBRATION);
-            } catch (Exception e) {
+            } catch (InterruptedException | IOException e) {
                 LOG.error("Unable to calibrate normal pressure!", e);
                 throw new PressureException("Unable to calibrate normal pressure!", e);
             }
         }
-        normalPressure = sum/ NUMBER_OF_ITERATIONS_OF_CALIBRATION;
+        normalPressure = sum / NUMBER_OF_ITERATIONS_OF_CALIBRATION;
         LOG.info("Normal pressure calibrated to {}", normalPressure);
     }
 
