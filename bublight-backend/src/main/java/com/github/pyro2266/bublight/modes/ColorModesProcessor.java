@@ -26,4 +26,9 @@ public interface ColorModesProcessor {
      * Set overlay mode.
      */
     void setOverlayLedMode(OverlayLedMode overlayLedMode);
+
+    /**
+     * Get current calculated colors
+     */
+    Color[] getCurrentColors();
 }
