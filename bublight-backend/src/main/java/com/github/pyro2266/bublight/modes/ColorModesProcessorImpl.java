@@ -58,7 +58,7 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
                         colors = baseLedMode.getNextColors();
                     }
                     if (overlayLedMode != null) {
-                        colors = overlayLedMode.getNextColors(colors);
+                        colors = overlayLedMode.getNextColors(colors.clone());
                     }
                 } catch (LedModeException e) {
                     LOG.error("Error while obtaining colors! Stopping loop!", e);
