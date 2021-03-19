@@ -28,6 +28,8 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
     private AtomicBoolean isRunning = new AtomicBoolean(false);
     private ReentrantLock modeLock = new ReentrantLock();
 
+    private Color[] currentColors;
+
     @Autowired
     public ColorModesProcessorImpl(LedRendererService ledRenderer, BubLightConfiguration bubLightConfiguration) {
         this.ledRenderer = ledRenderer;
@@ -65,6 +67,7 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
                     modeLock.unlock();
                 }
 
+                storeCurrentColors(colors);
                 ledRenderer.renderColors(colors);
 
                 try {
@@ -110,5 +113,14 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
         modeLock.lock();
         this.overlayLedMode = overlayLedMode;
         modeLock.unlock();
+    }
+
+    @Override
+    public synchronized Color[] getCurrentColors() {
+        return currentColors;
+    }
+
+    private synchronized void storeCurrentColors(Color[] currentColors) {
+        this.currentColors = currentColors.clone();
     }
 }
