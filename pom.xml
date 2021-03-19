@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.pyro2266.lightit</groupId>
-    <artifactId>lightit-aggregator</artifactId>
+    <groupId>com.github.pyro2266.bublight</groupId>
+    <artifactId>bublight-aggregator</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>lightit-backend</module>
-        <module>lightit-webapp</module>
+        <module>bublight-backend</module>
+        <module>bublight-webapp</module>
 
     </modules>
 
