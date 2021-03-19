@@ -13,6 +13,16 @@ public interface PressureService {
     float getPressureDifference() throws PressureException;
 
     /**
+     * Get cached pressure from pressure sensor.
+     */
+    float getCachedPressure();
+
+    /**
+     * Get difference between cached and normal pressure - pressure in calm state.
+     */
+    float getCachedPressureDifference();
+
+    /**
      * Calibrate normal pressure - pressure in calm state.
      */
     void calibrateNormalPressure() throws PressureException;
