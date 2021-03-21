@@ -38,24 +38,34 @@ public class RunningDotMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                float pressureDif = pressureService.getPressureDifference();
+                float pressureDiff = pressureService.getPressureDifference();
 
                 float moveBy;
-                if (pressureDif > 0) {
-                    moveBy = pressureDif / config.getPositivePressureStep() * config.getMovePerStep();
+                if (pressureDiff > -config.getPressureDiffThreshold() && pressureDiff < config
+                        .getPressureDiffThreshold()) {
+                    LOG.trace("Pressure diff {} is within threshold {}", pressureDiff, config.getPressureDiffThreshold());
+                    moveBy = config.getDefaultSpeed();
+                } else  if (pressureDiff > 0) {
+                    moveBy = pressureDiff / config.getPositivePressureStep() * config.getMovePerStep();
                 } else {
-                    moveBy = pressureDif / config.getNegativePressureStep() * config.getMovePerStep();
+                    moveBy = pressureDiff / config.getNegativePressureStep() * config.getMovePerStep();
+                }
+
+                if (config.isClockwiseRotation()) {
+                    moveBy = -1 * moveBy;
                 }
 
                 currentPosition = currentPosition + moveBy;
 
                 if (currentPosition > maxPosition) {
                     currentPosition -= maxPosition;
+                } else if (currentPosition < 0) {
+                    currentPosition = maxPosition - 1;
                 }
 
-                baseColors[(int)currentPosition % maxPosition] = config.getRunnerColor();
-                LOG.trace("PressureDiff: {}; moveBy: {}; currentPosition: {}; runnerPosition: {}", pressureDif, moveBy,
-                        currentPosition, (int)currentPosition % maxPosition);
+                LOG.trace("PressureDiff: {}; moveBy: {}; currentPosition: {}; runnerPosition: {}", pressureDiff, moveBy,
+                        currentPosition, (int) currentPosition);
+                baseColors[(int) currentPosition] = config.getRunnerColor();
 
             } catch (PressureException e) {
                 LOG.error("Unable to get pressure", e);

@@ -196,7 +196,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"positivePressureStep\": 20,\n    \"negativePressureStep\": 5,\n    \"defaultSpeed\": 0.01,\n    \"movePerStep\": 0.01,\n    \"runnerColor\": {\n        \"red\": 255,\n        \"green\": 255,\n        \"blue\": 255\n    }\n}"
+							"raw": "{\n    \"positivePressureStep\": 50,\n    \"negativePressureStep\": 20,\n    \"pressureDiffThreshold\": 25,\n    \"clockwiseRotation\": \"true\",\n    \"defaultSpeed\": 0.1,\n    \"movePerStep\": 0.01,\n    \"runnerColor\": {\n        \"red\": 255,\n        \"green\": 255,\n        \"blue\": 255\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/mode/overlay/runningDotMode",
