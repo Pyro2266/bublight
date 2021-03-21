@@ -1,13 +1,11 @@
 # BubLight
-Light up your hookah with a neopixel ring!
+Light up your hookah with a Raspberry and a neopixel ring!
 
-Get some **RaspberryPi**, connect the **neopixel LED ring** and the **BMP180 pressure sensor** to it,
-upload and start **BubLight** `.jar` file and you are ready to go!
-You can then connect to a **BubLight** web thingy, where you can **configure colors** and
-modes and see some **nice graph** showing **realtime pressure**!
+Get your **RaspberryPi**, connect the **neopixel LED ring** and the **BMP180 pressure sensor** to it, configure it, upload and start **BubLight** `.jar` file and you are ready to go!
+You can then connect to a **BubLight** web UI, where you can **configure colors** and **light modes** and see a **nice graph** showing **realtime pressure**!
 
 ## NOTE
-This **hobby project** is still **WORK IN PROGRESS** and it does not have any release yet.
+This **hobby project** is still a **WORK IN PROGRESS**.
 However, it had some successful demos :).
 
 ## Build and start in simulated mode
