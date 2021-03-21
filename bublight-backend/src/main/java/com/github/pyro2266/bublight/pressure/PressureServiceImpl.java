@@ -17,7 +17,6 @@ public class PressureServiceImpl implements PressureService {
 
     private final PressureSensor pressureSensor;
     private float normalPressure = 0;
-    private float cachedPressure = 0;
 
     @Autowired
     public PressureServiceImpl(PressureSensor pressureSensor) {
@@ -36,8 +35,7 @@ public class PressureServiceImpl implements PressureService {
     @Override
     public synchronized float getPressure() throws PressureException {
         try {
-            cachedPressure = pressureSensor.readPressure();
-            return cachedPressure;
+            return pressureSensor.readPressure();
         } catch (InterruptedException | IOException e) {
             LOG.error("Unable to read pressure!", e);
             throw new PressureException("Unable to read pressure!", e);
@@ -47,16 +45,6 @@ public class PressureServiceImpl implements PressureService {
     @Override
     public float getPressureDifference() throws PressureException {
         return normalPressure - getPressure();
-    }
-
-    @Override
-    public float getCachedPressure() {
-        return cachedPressure;
-    }
-
-    @Override
-    public float getCachedPressureDifference() {
-        return normalPressure - cachedPressure;
     }
 
     @Override
