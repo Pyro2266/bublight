@@ -4,9 +4,11 @@ import com.github.pyro2266.bublight.modes.Color;
 
 public class RunningDotModeConfig {
 
-    private float positivePressureStep = 20;
-    private float negativePressureStep = 5;
-    private float defaultSpeed = 0.01f;
+    private float positivePressureStep = 50;
+    private float negativePressureStep = 20;
+    private float pressureDiffThreshold = 25;
+    private boolean clockwiseRotation = false;
+    private float defaultSpeed = 0.1f;
     private float movePerStep = 0.01f;
     private Color runnerColor = new Color(255, 255, 255);
 
@@ -24,6 +26,22 @@ public class RunningDotModeConfig {
 
     public void setNegativePressureStep(float negativePressureStep) {
         this.negativePressureStep = negativePressureStep;
+    }
+
+    public float getPressureDiffThreshold() {
+        return pressureDiffThreshold;
+    }
+
+    public void setPressureDiffThreshold(float pressureDiffThreshold) {
+        this.pressureDiffThreshold = pressureDiffThreshold;
+    }
+
+    public boolean isClockwiseRotation() {
+        return clockwiseRotation;
+    }
+
+    public void setClockwiseRotation(boolean clockwiseRotation) {
+        this.clockwiseRotation = clockwiseRotation;
     }
 
     public float getDefaultSpeed() {
