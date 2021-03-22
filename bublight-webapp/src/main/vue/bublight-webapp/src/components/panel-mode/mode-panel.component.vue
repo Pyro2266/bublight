@@ -19,6 +19,13 @@
                                 <div class="ripple-container"></div>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#rainbow" data-toggle="tab">
+                                <i class="material-icons">toys</i> Rainbow
+                                <div class="ripple-container"></div>
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
