@@ -10,6 +10,7 @@
 
     <modules>
         <module>bublight-backend</module>
+        <module>bublight-webapp</module>
     </modules>
 
 </project>

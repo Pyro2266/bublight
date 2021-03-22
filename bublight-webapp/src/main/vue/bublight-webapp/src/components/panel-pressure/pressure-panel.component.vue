@@ -1,0 +1,23 @@
+<template>
+    <div class="card card-stats">
+        <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+                <i class="material-icons">speed</i>
+            </div>
+            <p class="card-category">{{ title }}</p>
+            <h3 class="card-title">
+                {{ value }}
+                <small>Pa</small>
+            </h3>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: ["title", "value"],        
+    }
+</script>

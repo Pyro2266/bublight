@@ -19,7 +19,7 @@
                         <configuration>
                             <nodeVersion>v13.9.0</nodeVersion>
                             <npmVersion>7.6.3</npmVersion>
-                            <workingDirectory>src/main/angular/bublight-webapp/</workingDirectory>
+                            <workingDirectory>src/main/vue/bublight-webapp/</workingDirectory>
                         </configuration>
                         <executions>
                             <execution>
