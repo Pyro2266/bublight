@@ -10,7 +10,7 @@
 			<music-panel></music-panel>
 		</div>
 		<div class="col-lg-3 col-md-6">
-			
+			<led-info></led-info>
 		</div>
 		<div class="col-12">
 			<chart title="Pressure Chart" :pressureArray="pressureArray" :value="pressure" subtitle="Realtime"></chart>
@@ -31,6 +31,7 @@
 	import MusicPanel from './components/panel-music/music-panel.component';
 	import OverlayPanel from './components/panel-overlay/overlay-panel.component';
 	import PressurePanel from './components/panel-pressure/pressure-panel.component';	
+	import LedInfo from './components/led-info/led-info.component';
 	import SockJS from 'sockjs-client';
 	import Stomp from 'stompjs';
 
@@ -43,7 +44,8 @@
 			ModePanel,
 			MusicPanel,
 			OverlayPanel,
-			PressurePanel
+			PressurePanel,
+			LedInfo
 		},
 
 		data() {

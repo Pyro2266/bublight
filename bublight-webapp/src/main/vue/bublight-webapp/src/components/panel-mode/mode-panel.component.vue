@@ -14,7 +14,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#rainbow" data-toggle="tab">
-                                <i class="material-icons">toys</i> Rainbow
+                                <i class="material-icons">looks</i> Rainbow
                                 <div class="ripple-container"></div>
                                 <div class="ripple-container"></div>
                             </a>
@@ -35,8 +35,8 @@
                 </div>
                 <div class="tab-pane" id="rainbow">
                     <div class="form-group">
-                        <label for="step" class="control-label">Step:</label>
-                        <input v-model.number="step" name="step" max="1" min="0.0001" step="0.0001" class="form-control" />
+                        <label for="step" class="control-label">Speed: {{ parseInt(this.step / (0.01 / 100)) }}%</label>
+                        <input v-model.number="step" name="step" type="range" max="0.01" min="0.0001" step="0.0001" class="custom-range" />
                     </div>
                     <button @click="modeSwitch(1)" class="btn btn-info btn-sm">Activate</button>
                 </div>
@@ -44,6 +44,13 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    .custom-range {
+        display: block;
+        width: 100%;
+    }
+</style>
 
 <script>
     import Vue from 'vue';
@@ -71,14 +78,6 @@
             .then(response => {
                 this.step = response.data.step;
             });
-
-            for(var i = 0; i < 16; i++) {
-                this.colors.push({
-                    red: 10,
-                    green: 10,
-                    blue: 10
-                })
-            }
         },
 
         methods: {
