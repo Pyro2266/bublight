@@ -62,6 +62,7 @@ public class LedModeController {
     @PostMapping(path = "/base/simpleRainbowMode")
     public ResponseEntity activateSimpleRainbowMode(@RequestBody SimpleRainbowModeConfig config) {
         LOG.info("Activating {}", SimpleRainbowMode.class);
+        simpleRainbowMode.setConfig(config);
         colorModesProcessor.setBaseLedMode(simpleRainbowMode);
         return ResponseEntity.ok().build();
     }
