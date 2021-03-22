@@ -1,4 +1,4 @@
-# bublight-vue2
+# Bublight
 
 ## Project setup
 ```
