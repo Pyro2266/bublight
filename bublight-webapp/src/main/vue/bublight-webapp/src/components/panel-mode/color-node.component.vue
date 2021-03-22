@@ -1,5 +1,5 @@
 <template>
-    <div :style="{'background-color': nodeColor}" class="color-node"></div>
+    <div :style="{'background-color': nodeColor}" :data-color="nodeColor" class="color-node"></div>
 </template>
 
 <style>
@@ -19,7 +19,7 @@
     }
 
     .color-picker.no-alpha .color-picker\:a {
-      display: none;
+        display: none;
     }
 </style>
 
