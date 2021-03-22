@@ -46,16 +46,12 @@
 
         methods: {
             drawCircle() {
-                // canvas related references
                 var canvas=document.getElementById("canvas");
                 var ctx=canvas.getContext("2d");
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // set the line width used to draw the arc segments
                 ctx.lineWidth=10;
 
-                // variables related to drawing arc segments
                 var PI=Math.PI;
                 var PI2=PI*2;
                 var cx=150;
@@ -63,28 +59,15 @@
                 var radius=50;
                 var arcRadians=PI2/16;
                 var spacingRadians=PI2/70;
-                //var arcCount=16;
                 var currentAngle=PI;
 
-                // Draw arc segments from a centerpoint at a specified radius (cx,cy,radius)
-                // Draw the specified count of arc segments (arcCount)
-                // from the current radian angle (currentAngle)
-                // with each segment having the specified arc (arcRadians)
-                // and reducing each segment to allow specified spacing (spacingRadians)
                 for(const color of this.colors){
-
-                    // calculate the starting and ending angle of an arc segment
-                    // allow for spacing between arcs
                     var startingAngle=currentAngle;
                     var endingAngle=startingAngle+arcRadians-spacingRadians;
-
-                    // draw one arc segment
                     ctx.beginPath();
                     ctx.arc(cx,cy,radius,startingAngle,endingAngle);
                     ctx.strokeStyle=this.rgbToHex(color);
                     ctx.stroke();
-
-                    // increment the current angle for the next arc
                     currentAngle+=arcRadians;
                 }
             },
