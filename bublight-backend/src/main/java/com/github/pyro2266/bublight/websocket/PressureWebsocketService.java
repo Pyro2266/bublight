@@ -1,5 +1,6 @@
 package com.github.pyro2266.bublight.websocket;
 
+import com.github.pyro2266.bublight.pressure.PressureException;
 import com.github.pyro2266.bublight.pressure.PressureService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -56,10 +57,14 @@ public class PressureWebsocketService {
         }
         LOG.info("Scheduling new pressure difference notifier");
         scheduledFuture = executorService.scheduleWithFixedDelay(() -> {
-            float pressureDiff = this.pressureService.getCachedPressureDifference();
-            LOG.trace("Sending new pressure {} to websocket subscribers at {}", pressureDiff,
-                    PRESSURE_DIFF_WEBSOCKET_ENDPOINT);
-            this.template.convertAndSend(PRESSURE_DIFF_WEBSOCKET_ENDPOINT, pressureDiff);
+            try {
+                float pressureDiff = this.pressureService.getPressureDifference();
+                LOG.trace("Sending new pressure {} to websocket subscribers at {}", pressureDiff,
+                        PRESSURE_DIFF_WEBSOCKET_ENDPOINT);
+                this.template.convertAndSend(PRESSURE_DIFF_WEBSOCKET_ENDPOINT, pressureDiff);
+            } catch (PressureException e) {
+                LOG.error("Unable to get pressure difference!", e);
+            }
         }, refreshRate, refreshRate, TimeUnit.MILLISECONDS);
     }
 }

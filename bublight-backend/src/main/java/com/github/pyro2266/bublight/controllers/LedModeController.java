@@ -5,8 +5,10 @@ import com.github.pyro2266.bublight.modes.base.simplecolor.SimpleColorMode;
 import com.github.pyro2266.bublight.modes.base.simplecolor.SimpleColorModeConfig;
 import com.github.pyro2266.bublight.modes.base.simplerainbow.SimpleRainbowMode;
 import com.github.pyro2266.bublight.modes.base.simplerainbow.SimpleRainbowModeConfig;
-import com.github.pyro2266.bublight.modes.overlay.BrightnessByPressureMode;
-import com.github.pyro2266.bublight.modes.overlay.BrightnessByPressureModeConfig;
+import com.github.pyro2266.bublight.modes.overlay.brightnessbypressure.BrightnessByPressureMode;
+import com.github.pyro2266.bublight.modes.overlay.brightnessbypressure.BrightnessByPressureModeConfig;
+import com.github.pyro2266.bublight.modes.overlay.runningdot.RunningDotMode;
+import com.github.pyro2266.bublight.modes.overlay.runningdot.RunningDotModeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +31,17 @@ public class LedModeController {
     private final SimpleColorMode simpleColorMode;
     private final SimpleRainbowMode simpleRainbowMode;
     private final BrightnessByPressureMode brightnessByPressureMode;
+    private final RunningDotMode runningDotMode;
 
     @Autowired
     public LedModeController(ColorModesProcessor colorModesProcessor, SimpleColorMode simpleColorMode,
-            SimpleRainbowMode simpleRainbowMode, BrightnessByPressureMode brightnessByPressureMode) {
+            SimpleRainbowMode simpleRainbowMode, BrightnessByPressureMode brightnessByPressureMode,
+            RunningDotMode runningDotMode) {
         this.colorModesProcessor = colorModesProcessor;
         this.simpleColorMode = simpleColorMode;
         this.simpleRainbowMode = simpleRainbowMode;
         this.brightnessByPressureMode = brightnessByPressureMode;
+        this.runningDotMode = runningDotMode;
     }
 
     @PostMapping(path = "/base/simpleColorMode")
@@ -80,6 +85,21 @@ public class LedModeController {
     public ResponseEntity getCurrentBrightnessByPressureModeConfig() {
         BrightnessByPressureModeConfig config = brightnessByPressureMode.getConfig();
         LOG.info("Current config for {} is {}", BrightnessByPressureMode.class, config);
+        return ResponseEntity.ok(config);
+    }
+
+    @PostMapping(path = "/overlay/runningDotMode")
+    public ResponseEntity activateRunningDotMode(@RequestBody RunningDotModeConfig config) {
+        LOG.info("Activating {} with config {}", RunningDotMode.class, config);
+        runningDotMode.setConfig(config);
+        colorModesProcessor.setOverlayLedMode(runningDotMode);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(path = "/overlay/runningDotMode")
+    public ResponseEntity getCurrentRunningDotModeConfig() {
+        RunningDotModeConfig config = runningDotMode.getConfig();
+        LOG.info("Current config for {} is {}", RunningDotMode.class, config);
         return ResponseEntity.ok(config);
     }
 }

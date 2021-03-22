@@ -1,4 +1,4 @@
-package com.github.pyro2266.bublight.modes.overlay;
+package com.github.pyro2266.bublight.modes.overlay.brightnessbypressure;
 
 import com.github.pyro2266.bublight.modes.Color;
 import com.github.pyro2266.bublight.modes.OverlayLedMode;

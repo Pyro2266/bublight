@@ -1,4 +1,4 @@
-package com.github.pyro2266.bublight.modes.overlay;
+package com.github.pyro2266.bublight.modes.overlay.brightnessbypressure;
 
 public class BrightnessByPressureModeConfig {
 
