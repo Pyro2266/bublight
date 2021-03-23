@@ -42,12 +42,23 @@
         },
 
         created() {
-            this.modeGetRequest();
+            this.modeGetRequest().then(() => {
+                let isSame = true;
+                let colorI = this.colors[0];
+                this.colors.forEach((color) => {                    
+                    isSame = JSON.stringify(color) == JSON.stringify(colorI);
+                    colorI = color;
+                });
+
+                if(isSame) {
+                    this.globalColor = colorI;
+                }
+            });            
         },
 
         methods: {
-            modeGetRequest() {
-                this.$http.get(this.$apiURL + "/mode/base/simpleColorMode/")
+            async modeGetRequest() {
+                await this.$http.get(this.$apiURL + "/mode/base/simpleColorMode/")
                 .then(response => {
                     this.colors = response.data.colors;
                 });
