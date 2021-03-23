@@ -1,6 +1,17 @@
-<template>
-    <div style="margin: 30px 0px; height: 110px">
-        <canvas id="canvas" height=110></canvas>
+<template>    
+    <div class="card card-stats">
+        <div class="card-header card-header-info card-header-icon" style="min-height: 69px;">
+            <div style="position:absolute; display:table; left:0; top:-30px;">
+                <canvas id="canvas" width=110 height=110></canvas>
+            </div>
+            <p style="margin-top: 11px;" class="card-category">LEDs Info</p>
+            <h3 class="card-title">
+               
+            </h3>
+        </div>
+        <div class="card-footer">
+
+        </div>
     </div>
 </template>
 
@@ -54,7 +65,7 @@
 
                 var PI=Math.PI;
                 var PI2=PI*2;
-                var cx=150;
+                var cx=55;
                 var cy=55;
                 var radius=50;
                 var arcRadians=PI2/16;
