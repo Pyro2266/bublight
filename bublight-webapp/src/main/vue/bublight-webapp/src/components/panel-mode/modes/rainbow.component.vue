@@ -1,22 +1,14 @@
 <template>
     <div>
-        <div class="form-group">
-            <div>Speed: {{ parseInt(this.step / (0.01 / 100)) }}%</div>
-            <div>
-                <input v-model.number="step" name="step" type="range" max="0.01" min="0.0001" step="0.0001" class="custom-range" />
-            </div>
+        <h4 class="text-muted">Speed: {{ parseInt(this.step / (0.01 / 100)) }}%</h4>
+        <div class="mt-2">
+            <input v-model.number="step" name="step" type="range" max="0.01" min="0.0001" step="0.0001" class="custom-range" />
         </div>
+        <hr style="background-color: rgba(180, 180, 180, 0.2)" />
         <button v-if="!activeModes.rainbow" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
         <button v-else @click="updateMode()" class="btn btn-success btn-sm">Update</button>
     </div>
 </template>
-
-<style scoped>
-    .custom-range {
-        display: block;
-        width: 100%;
-    }
-</style>
 
 <script>
     export default {

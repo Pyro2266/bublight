@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <div class="form-group">
-            <div class="float-left mr-2">
-                Runner Color:
-            </div>
-            <color-node @setColor="setColor(0, $event)" :color="runnerColor" />
-            <div class="clearfix"></div>
-        </div>
+    <div>        
+        <h4 class="float-left mr-2">
+            Runner Color:
+        </h4>
+        <color-node @setColor="setColor(0, $event)" :color="runnerColor" />
+        <div class="clearfix"></div>
+
+        <hr style="background-color: rgba(180, 180, 180, 0.2)" />        
 
         <button v-if="!activeModes.runningDot" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
         <div v-else>
