@@ -6,7 +6,7 @@
             </div>
             <p class="card-category">LEDs Switch</p>
             <h3 class="card-title">
-                <input v-model="ledSwitch" type="checkbox" class="led-switch" /> 
+                <input v-model="ledSwitch" type="checkbox" :checked="activeModes.led" class="led-switch" /> 
             </h3>
         </div>
         <div class="card-footer">
@@ -17,6 +17,8 @@
 
 <script>
     export default {
+        props: ["activeModes"],
+
         data() {
             return {
                 ledSwitch: false
@@ -34,8 +36,10 @@
             ledSwitch(value) {
                 if(value) {
                     this.$http.post(this.$apiURL+"/led/start", {});
+                    this.$emit("setMode", {mode: "led", type: "activate"});
                 } else {
                     this.$http.post(this.$apiURL+"/led/stop", {});
+                    this.$emit("setMode", {mode: "led", type: "deactivate"});
                 }
             }
         }

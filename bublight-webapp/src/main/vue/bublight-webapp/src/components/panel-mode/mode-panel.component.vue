@@ -6,14 +6,14 @@
                     <span class="nav-tabs-title">Modes:</span>
                     <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
-                            <a class="nav-link active show" href="#simpleColor" data-toggle="tab">
+                            <a class="nav-link" :class="{'text-success active show': activeModes.simpleColor}" href="#simpleColor" data-toggle="tab">
                                 <i class="material-icons">color_lens</i> Simple Color
                                 <div class="ripple-container"></div>
                                 <div class="ripple-container"></div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#rainbow" data-toggle="tab">
+                            <a class="nav-link" :class="{'text-success active show': activeModes.rainbow}" href="#rainbow" data-toggle="tab">
                                 <i class="material-icons">looks</i> Rainbow
                                 <div class="ripple-container"></div>
                                 <div class="ripple-container"></div>
@@ -25,20 +25,24 @@
         </div>
         <div class="card-body">
             <div class="tab-content">
-                <div class="tab-pane active show" id="simpleColor">         
+                <div class="tab-pane" :class="{'active show': activeModes.simpleColor}" id="simpleColor">         
                     <div class="color-nodes-list">
                         <color-node v-for="(color, key) in colors" :key="key" @setColor="setColor(key, $event)" :color="color" />
                     </div>     
                     <br />
                     <hr style="background-color: rgba(180, 180, 180, 0.2)" />
-                    <button @click="modeSwitch(0)" class="btn btn-info btn-sm">Activate</button>
+                    <button v-if="!activeModes.simpleColor" @click="activateSimpleColorMode()" class="btn btn-info btn-sm">Activate</button>
+                    <button v-else @click="updateSimpleColorMode()" class="btn btn-success btn-sm">Update</button>
                 </div>
-                <div class="tab-pane" id="rainbow">
+                <div class="tab-pane" :class="{'active show': activeModes.rainbow}" id="rainbow">
                     <div class="form-group">
-                        <label for="step" class="control-label">Speed: {{ parseInt(this.step / (0.01 / 100)) }}%</label>
-                        <input v-model.number="step" name="step" type="range" max="0.01" min="0.0001" step="0.0001" class="custom-range" />
+                        <div>Speed: {{ parseInt(this.step / (0.01 / 100)) }}%</div>
+                        <div>
+                            <input v-model.number="step" name="step" type="range" max="0.01" min="0.0001" step="0.0001" class="custom-range" />
+                        </div>
                     </div>
-                    <button @click="modeSwitch(1)" class="btn btn-info btn-sm">Activate</button>
+                    <button v-if="!activeModes.rainbow" @click="activateRainbowMode()" class="btn btn-info btn-sm">Activate</button>
+                    <button v-else @click="updateRainbowMode()" class="btn btn-success btn-sm">Update</button>
                 </div>
             </div>
         </div>
@@ -54,9 +58,11 @@
 
 <script>
     import Vue from 'vue';
-    import ColorNode from './color-node.component';
+    import ColorNode from '../color-node.component';
 
     export default {
+        props: ["activeModes"],
+
         components: {
             ColorNode
         },
@@ -69,31 +75,54 @@
         },
 
         created() {
-            this.$http.get(this.$apiURL + "/mode/base/simpleColorMode/")
-            .then(response => {
-                this.colors = response.data.colors;
-            });
-
-            this.$http.get(this.$apiURL + "/mode/base/simpleRainbowMode")
-            .then(response => {
-                this.step = response.data.step;
-            });
+            this.simpleColorModeGetRequest();
+            this.rainbowModeGetRequest();
+            
         },
 
         methods: {
-            modeSwitch(mode) {
-                switch(mode) {
-                    case 0:
-                        this.$http.post(this.$apiURL + "/mode/base/simpleColorMode", {
-                            "colors": this.colors
-                        });
-                        break;
-                    case 1:
-                        this.$http.post(this.$apiURL + "/mode/base/simpleRainbowMode", {
-                            "step": this.step
-                        });
-                        break;
-                }
+            simpleColorModeGetRequest() {
+                this.$http.get(this.$apiURL + "/mode/base/simpleColorMode/")
+                .then(response => {
+                    this.colors = response.data.colors;
+                });
+            },
+
+            simpleColorModeSetRequest() {
+                this.$http.post(this.$apiURL + "/mode/base/simpleColorMode", {
+                    "colors": this.colors
+                });
+            },
+
+            rainbowModeGetRequest() {
+                this.$http.get(this.$apiURL + "/mode/base/simpleRainbowMode")
+                .then(response => {
+                    this.step = response.data.step;
+                });
+            },
+
+            rainbowModeSetRequest() {
+                this.$http.post(this.$apiURL + "/mode/base/simpleRainbowMode", {
+                    "step": this.step
+                });
+            },
+
+            activateSimpleColorMode() {
+                this.simpleColorModeSetRequest();
+                this.$emit("setMode", {mode: "simpleColor", type: "activate"});
+            },
+
+            activateRainbowMode() {
+                this.rainbowModeSetRequest();
+                this.$emit("setMode", {mode: "rainbow", type: "activate"});
+            },     
+            
+            updateSimpleColorMode() {
+                this.simpleColorModeSetRequest();
+            },
+
+            updateRainbowMode() {
+                this.rainbowModeSetRequest();
             },
 
             setColor(index, color) {

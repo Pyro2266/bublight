@@ -8,7 +8,7 @@
     import SockJS from 'sockjs-client';
 	import Stomp from 'stompjs';
 
-    export default {
+    export default {        
         data() {
             return {
                 colors: []

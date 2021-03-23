@@ -1,28 +1,34 @@
 <template>
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
-			<pressure-panel title="Pressure" :value="pressure" icon="icon-app"></pressure-panel>
+			<pressure-panel title="Pressure" :value="pressure" icon="icon-app" />
 		</div>
 		<div class="col-lg-3 col-md-6">
-			<led-panel></led-panel>
+			<led-panel :activeModes="activeModes" @setMode="setMode($event)" />
 		</div>
 		<div class="col-lg-3 col-md-6">
-			<music-panel></music-panel>
+			<music-panel />
 		</div>
 		<div class="col-lg-3 col-md-6">
-			<led-info></led-info>
+			<led-info />
 		</div>
 		<div class="col-12">
-			<chart title="Pressure Chart" :pressureArray="pressureArray" :value="pressure" subtitle="Realtime"></chart>
+			<chart title="Pressure Chart" :pressureArray="pressureArray" :value="pressure" subtitle="Realtime" />
 		</div>
 		<div class="col-lg-6 col-md-12">
-			<mode-panel></mode-panel>
+			<mode-panel :activeModes="activeModes" @setMode="setMode($event)" />
 		</div>
 		<div class="col-lg-6 col-md-12">
-			<overlay-panel></overlay-panel>
+			<overlay-panel :activeModes="activeModes" @setMode="setMode($event)" />
 		</div>
 	</div>
 </template>
+
+<style>
+	.nav-tabs .nav-item .nav-link.text-success {
+		color: #9c27b0 !important;
+	}
+</style>
 
 <script>
 	import Chart from './components/chart/chart.component';
@@ -51,7 +57,14 @@
 		data() {
 			return {
 				pressure: 0,
-				pressureArray: []
+				pressureArray: [],
+				activeModes: {
+					led: false,
+					simpleColor: false,
+					rainbow: false,
+					brightness: false,
+					runningDot: false
+				}
 			}
 		},
 
@@ -71,7 +84,54 @@
 					this.pressureArray.shift();					
 				});
 			});
-		}
+		},
 
+		methods: {
+			setMode(e) {
+				if(e.type == 'activate') {
+					this.activateMode(e);
+				} else {
+					this.deactivateModes(e);
+				}
+			},
+
+			activateMode(e) {
+				switch(e.mode) {
+					case 'brightness':
+						this.$set(this.activeModes, 'runningDot', false);
+						this.$set(this.activeModes, 'brightness', true);
+						break;
+					case 'runningDot':
+						this.$set(this.activeModes, 'brightness', false);
+						this.$set(this.activeModes, 'runningDot', true);
+						break;
+					case 'simpleColor':
+						this.$set(this.activeModes, 'rainbow', false);
+						this.$set(this.activeModes, 'simpleColor', true);
+						break;
+					case 'rainbow':
+						this.$set(this.activeModes, 'simpleColor', false);
+						this.$set(this.activeModes, 'rainbow', true);
+						break;
+					case 'led':
+						this.$set(this.activeModes, 'led', true);
+						break;
+				}	
+			},
+
+			deactivateModes(e) {
+				switch(e.mode) {
+					case 'brightness':						
+						this.$set(this.activeModes, 'brightness', false);
+						break;
+					case 'runningDot':						
+						this.$set(this.activeModes, 'runningDot', false);
+						break;					
+					case 'led':
+						this.$set(this.activeModes, 'led', false);
+						break;
+				}	
+			}
+		}
 	}
 </script>
