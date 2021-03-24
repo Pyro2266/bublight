@@ -3,10 +3,6 @@
 </template>
 
 <style>
-    .color-nodes-list {
-        padding: 10px; 
-    }
-
     .color-node { 
         padding: 5px; 
         width: 20px; 
