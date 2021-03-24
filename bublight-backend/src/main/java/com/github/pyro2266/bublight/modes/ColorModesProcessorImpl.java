@@ -91,6 +91,11 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
     }
 
     @Override
+    public void disableOverlayMode() {
+        this.setOverlayLedMode(null);
+    }
+
+    @Override
     public synchronized Color[] getCurrentColors() {
         return currentColors;
     }
