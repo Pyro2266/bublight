@@ -35,6 +35,7 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
         this.ledRenderer = ledRenderer;
         this.bubLightConfiguration = bubLightConfiguration;
         this.colors = new Color[this.bubLightConfiguration.getLedCount()];
+
         for (int i = 0; i < colors.length; i++) {
             colors[i] = new Color(55, 55, 55);
         }
@@ -47,38 +48,12 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
 
     @Override
     public void startColorLoop() {
-        isRunning.set(true);
-        colorLoopThread = new Thread( () -> {
-            LOG.info("Starting color loop!");
-            while (isRunning.get()) {
+        if( !isRunning.compareAndSet( false, true) ){
+            LOG.info( "Loop is already running" );
+            return;
+        }
 
-                modeLock.lock();
-                try {
-                    if (baseLedMode != null) {
-                        colors = baseLedMode.getNextColors();
-                    }
-                    if (overlayLedMode != null) {
-                        colors = overlayLedMode.getNextColors(colors.clone());
-                    }
-                } catch (LedModeException e) {
-                    LOG.error("Error while obtaining colors! Stopping loop!", e);
-                    isRunning.set(false);
-                } finally {
-                    modeLock.unlock();
-                }
-
-                storeCurrentColors(colors);
-                ledRenderer.renderColors(colors);
-
-                try {
-                    Thread.sleep(refreshRate.get());
-                } catch (InterruptedException e) {
-                    LOG.error("Error in core color loop!", e);
-                    return;
-                }
-            }
-            LOG.info("Color loop stopped!");
-        } );
+        colorLoopThread = getNewColorLoopThread();
         colorLoopThread.start();
     }
 
@@ -122,5 +97,39 @@ public class ColorModesProcessorImpl implements ColorModesProcessor {
 
     private synchronized void storeCurrentColors(Color[] currentColors) {
         this.currentColors = currentColors.clone();
+    }
+
+    private Thread getNewColorLoopThread(){
+        return new Thread( () -> {
+            LOG.info("Starting color loop!");
+            while (isRunning.get()) {
+
+                modeLock.lock();
+                try {
+                    if (baseLedMode != null) {
+                        colors = baseLedMode.getNextColors();
+                    }
+                    if (overlayLedMode != null) {
+                        colors = overlayLedMode.getNextColors(colors.clone());
+                    }
+                } catch (LedModeException e) {
+                    LOG.error("Error while obtaining colors! Stopping loop!", e);
+                    isRunning.set(false);
+                } finally {
+                    modeLock.unlock();
+                }
+
+                storeCurrentColors(colors);
+                ledRenderer.renderColors(colors);
+
+                try {
+                    Thread.sleep(refreshRate.get());
+                } catch (InterruptedException e) {
+                    LOG.error("Error in core color loop!", e);
+                    return;
+                }
+            }
+            LOG.info("Color loop stopped!");
+        } );
     }
 }
