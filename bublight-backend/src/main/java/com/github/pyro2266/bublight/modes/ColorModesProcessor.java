@@ -28,6 +28,11 @@ public interface ColorModesProcessor {
     void setOverlayLedMode(OverlayLedMode overlayLedMode);
 
     /**
+     * Disable overlay mode.
+     */
+    void disableOverlayMode();
+
+    /**
      * Get current calculated colors
      */
     Color[] getCurrentColors();
