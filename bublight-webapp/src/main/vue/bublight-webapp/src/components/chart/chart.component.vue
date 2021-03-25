@@ -2,9 +2,14 @@
     <div class="card card-chart">
         <div class="card-header pb-0">
             <div class="row">
-                <div class="col-sm-6 text-left">
+                <div class="col-sm-12 text-left">
                     <h5 class="card-category">{{ subtitle }}</h5>
-                    <h2 class="card-title">{{ title }}</h2>
+                    <h2 class="card-title">
+                        {{ title }}
+                        <div class="float-right">
+                            {{ pressure }}<small>Pa</small>
+                        </div>
+                    </h2>
                 </div>
             </div>
         </div>
@@ -18,11 +23,16 @@
 
 <script>
     import Chart from 'chart.js';
+    import SockJS from 'sockjs-client';
+	import Stomp from 'stompjs';
+
     export default {    
-        props: ["title", "subtitle", "value", "pressureArray"],
+        props: ["title", "subtitle"],
 
         data() {
             return {
+                pressureArray: [],
+                pressure: 0,
                 chart_labels: [],
                 chart: null,                
                 config: {
@@ -97,9 +107,22 @@
         created() {
             for(var i = 0; i < 50; i++) {
                 this.config.data.labels.push(i);
+                this.pressureArray.push(0);
             }
 
             Chart.defaults.global.tooltips.enabled = false;
+
+            let ws = new SockJS(this.$apiURL + "/socket");
+			let stompClient = Stomp.over(ws)
+			stompClient.debug = null
+			stompClient.connect({}, () => {
+				stompClient.subscribe("/pressureSubscribe", (message) => {
+					const pressure = (Math.round(message.body));
+					this.pressure = pressure;
+					this.pressureArray.push(pressure);
+					this.pressureArray.shift();					
+				});
+			});
         },
 
         mounted() {

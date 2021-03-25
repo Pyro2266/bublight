@@ -9,10 +9,7 @@
         <hr style="background-color: rgba(180, 180, 180, 0.2)" />        
 
         <button v-if="!activeModes.runningDot" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
-        <div v-else>
-            <button @click="updateMode()" class="btn btn-success btn-sm">Update</button>
-            <button @click="deactivateMode()" class="btn btn-danger btn-sm">Deactivate</button>
-        </div>
+        <button v-else @click="updateMode()" class="btn btn-success btn-sm">Update</button>
     </div>
 </template>
 
@@ -89,10 +86,6 @@
 
             updateMode() {
                 this.modeSetRequest();
-            },
-
-            deactivateMode() {
-                this.$emit("setMode", {mode: "runningDot", type: "deactivate"});
             },
 
             setColor(key, e) {

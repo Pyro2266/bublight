@@ -1,69 +1,31 @@
 <template>
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<pressure-panel title="Pressure" :value="pressure" icon="icon-app" />
+	<div>
+		<div class="row">
+			<div class="col-lg-3 col-md-6">
+				<session-panel />
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<led-panel :activeModes="activeModes" @setMode="setMode($event)" />
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<music-panel />
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<led-info />
+			</div>
+			<div class="col-12">
+				<chart title="Pressure Chart" subtitle="Realtime" />
+			</div>
+			<div class="col-lg-6 col-md-12">
+				<mode-panel :activeModes="activeModes" @setMode="setMode($event)" />
+			</div>
+			<div class="col-lg-6 col-md-12">
+				<overlay-panel :activeModes="activeModes" @setMode="setMode($event)" />
+			</div>
 		</div>
-		<div class="col-lg-3 col-md-6">
-			<led-panel :activeModes="activeModes" @setMode="setMode($event)" />
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<music-panel />
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<led-info />
-		</div>
-		<div class="col-12">
-			<chart title="Pressure Chart" :pressureArray="pressureArray" :value="pressure" subtitle="Realtime" />
-		</div>
-		<div class="col-lg-6 col-md-12">
-			<mode-panel :activeModes="activeModes" @setMode="setMode($event)" />
-		</div>
-		<div class="col-lg-6 col-md-12">
-			<overlay-panel :activeModes="activeModes" @setMode="setMode($event)" />
-		</div>
+		<session-modal />
 	</div>
 </template>
-
-<style>
-	.nav-tabs .nav-item .nav-link.text-success {
-		color: #9c27b0 !important;
-	}
-
-	.custom-range {
-        display: block;
-        -webkit-appearance: none;
-        width: 100%;
-        height: 6px;
-        border-radius: 5px;  
-        background: #FFF;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-    }
-
-    .custom-range::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%; 
-        background: #10dcf7;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.14), 0 7px 5px -5px rgba(0, 188, 212, 0.4);
-    }
-
-    .custom-range::-moz-range-thumb {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: #10dcf7;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.14), 0 7px 5px -5px rgba(0, 188, 212, 0.4);
-    }
-</style>
 
 <script>
 	import Chart from './components/chart/chart.component';
@@ -71,10 +33,10 @@
 	import ModePanel from './components/panel-mode/mode-panel.component';
 	import MusicPanel from './components/panel-music/music-panel.component';
 	import OverlayPanel from './components/panel-overlay/overlay-panel.component';
-	import PressurePanel from './components/panel-pressure/pressure-panel.component';	
+	import SessionPanel from './components/panel-session/session-panel.component';
 	import LedInfo from './components/led-info/led-info.component';
-	import SockJS from 'sockjs-client';
-	import Stomp from 'stompjs';
+	import SessionModal from './components/panel-session/modals/session-modal.component';
+	
 
 	export default {
 		name: 'App',
@@ -85,8 +47,9 @@
 			ModePanel,
 			MusicPanel,
 			OverlayPanel,
-			PressurePanel,
-			LedInfo
+			SessionPanel,
+			LedInfo,
+			SessionModal
 		},
 
 		data() {
@@ -102,23 +65,25 @@
 				}
 			}
 		},
+		
+		mounted() {
+			// window.$.notify({
+			// 	message: 'Time to change coal!',
+			// 	title: 'Warning!',
+			// 	icon: 'warning'
+			// },{				
+			// 	type: 'warning',
+			// 	mouse_over: 'pause',
+			// });
 
-		created() {
-			for(var i = 0; i < 50; i++) {
-				this.pressureArray.push(0);
-			}
-
-			let ws = new SockJS(this.$apiURL + "/socket");
-			let stompClient = Stomp.over(ws)
-			stompClient.debug = null
-			stompClient.connect({}, () => {
-				stompClient.subscribe("/pressureSubscribe", (message) => {
-					const pressure = (Math.round(message.body));
-					this.pressure = pressure;
-					this.pressureArray.push(pressure);
-					this.pressureArray.shift();					
-				});
-			});
+			// window.$.notify({
+			// 	message: 'Longest drag of session!',
+			// 	title: 'Achievment!',
+			// 	icon: 'info'
+			// },{				
+			// 	type: 'info',
+			// 	mouse_over: 'pause',
+			// });
 		},
 
 		methods: {
@@ -156,10 +121,8 @@
 
 			deactivateModes(e) {
 				switch(e.mode) {
-					case 'brightness':						
+					case 'overlay':						
 						this.$set(this.activeModes, 'brightness', false);
-						break;
-					case 'runningDot':						
 						this.$set(this.activeModes, 'runningDot', false);
 						break;					
 					case 'led':
