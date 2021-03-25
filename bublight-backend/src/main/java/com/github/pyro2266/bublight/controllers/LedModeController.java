@@ -103,4 +103,11 @@ public class LedModeController {
         LOG.info("Current config for {} is {}", RunningDotMode.class, config);
         return ResponseEntity.ok(config);
     }
+
+    @PostMapping(path = "/overlay/disable")
+    public ResponseEntity activateRunningDotMode() {
+        LOG.info("Disabling overlay mode");
+        colorModesProcessor.disableOverlayMode();
+        return ResponseEntity.ok().build();
+    }
 }

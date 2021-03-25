@@ -9,210 +9,250 @@
 			"name": "modes",
 			"item": [
 				{
-					"name": "get simpleColorModeConfig",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/mode/base/simpleColorMode/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"base",
-								"simpleColorMode",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "activate simpleColorMode",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"colors\": [\n        {\n            \"red\": 0,\n            \"green\": 0,\n            \"blue\": 0\n        },\n        {\n            \"red\": 10,\n            \"green\": 10,\n            \"blue\": 10\n        },\n        {\n            \"red\": 20,\n            \"green\": 20,\n            \"blue\": 20\n        },\n        {\n            \"red\": 30,\n            \"green\": 30,\n            \"blue\": 30\n        },\n        {\n            \"red\": 40,\n            \"green\": 40,\n            \"blue\": 40\n        },\n        {\n            \"red\": 50,\n            \"green\": 50,\n            \"blue\": 50\n        },\n        {\n            \"red\": 60,\n            \"green\": 60,\n            \"blue\": 60\n        },\n        {\n            \"red\": 70,\n            \"green\": 70,\n            \"blue\": 70\n        },\n        {\n            \"red\": 80,\n            \"green\": 80,\n            \"blue\": 80\n        },\n        {\n            \"red\": 90,\n            \"green\": 90,\n            \"blue\": 90\n        },\n        {\n            \"red\": 100,\n            \"green\": 100,\n            \"blue\": 100\n        },\n        {\n            \"red\": 110,\n            \"green\": 110,\n            \"blue\": 110\n        },\n        {\n            \"red\": 120,\n            \"green\": 120,\n            \"blue\": 120\n        },\n        {\n            \"red\": 130,\n            \"green\": 130,\n            \"blue\": 130\n        },\n        {\n            \"red\": 140,\n            \"green\": 140,\n            \"blue\": 140\n        },\n        {\n            \"red\": 150,\n            \"green\": 150,\n            \"blue\": 150\n        }\n    ]\n}"
+					"name": "base",
+					"item": [
+						{
+							"name": "get simpleColorModeConfig",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/mode/base/simpleColorMode/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"base",
+										"simpleColorMode",
+										""
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/mode/base/simpleColorMode/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"base",
-								"simpleColorMode",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get simpleRainbowModeConfig",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/mode/base/simpleRainbowMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"base",
-								"simpleRainbowMode"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "activate simpleRainbowMode",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"step\": 0.0005\n}"
+						{
+							"name": "activate simpleColorMode",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"colors\": [\n        {\n            \"red\": 0,\n            \"green\": 0,\n            \"blue\": 0\n        },\n        {\n            \"red\": 10,\n            \"green\": 10,\n            \"blue\": 10\n        },\n        {\n            \"red\": 20,\n            \"green\": 20,\n            \"blue\": 20\n        },\n        {\n            \"red\": 30,\n            \"green\": 30,\n            \"blue\": 30\n        },\n        {\n            \"red\": 40,\n            \"green\": 40,\n            \"blue\": 40\n        },\n        {\n            \"red\": 50,\n            \"green\": 50,\n            \"blue\": 50\n        },\n        {\n            \"red\": 60,\n            \"green\": 60,\n            \"blue\": 60\n        },\n        {\n            \"red\": 70,\n            \"green\": 70,\n            \"blue\": 70\n        },\n        {\n            \"red\": 80,\n            \"green\": 80,\n            \"blue\": 80\n        },\n        {\n            \"red\": 90,\n            \"green\": 90,\n            \"blue\": 90\n        },\n        {\n            \"red\": 100,\n            \"green\": 100,\n            \"blue\": 100\n        },\n        {\n            \"red\": 110,\n            \"green\": 110,\n            \"blue\": 110\n        },\n        {\n            \"red\": 120,\n            \"green\": 120,\n            \"blue\": 120\n        },\n        {\n            \"red\": 130,\n            \"green\": 130,\n            \"blue\": 130\n        },\n        {\n            \"red\": 140,\n            \"green\": 140,\n            \"blue\": 140\n        },\n        {\n            \"red\": 150,\n            \"green\": 150,\n            \"blue\": 150\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/mode/base/simpleColorMode/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"base",
+										"simpleColorMode",
+										""
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/mode/base/simpleRainbowMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"base",
-								"simpleRainbowMode"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get brightnessByPressureModeConfig",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/mode/overlay/brightnessByPressureMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"overlay",
-								"brightnessByPressureMode"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "activate brightnessByPressureMode",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"positivePressureRange\": 800,\n    \"negativePressureRange\": 500,\n    \"defaultBrightness\": 0.2,\n    \"minBrightness\": 0.01,\n    \"maxBrightness\": 0.5,\n    \"maxStep\": 0.07\n}"
+						{
+							"name": "get simpleRainbowModeConfig",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/mode/base/simpleRainbowMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"base",
+										"simpleRainbowMode"
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/mode/overlay/brightnessByPressureMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"overlay",
-								"brightnessByPressureMode"
-							]
+						{
+							"name": "activate simpleRainbowMode",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"step\": 0.0005\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/mode/base/simpleRainbowMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"base",
+										"simpleRainbowMode"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "get runningDotModeConfig",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/mode/overlay/runningDotMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"overlay",
-								"runningDotMode"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "activate runningDotMode",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"positivePressureStep\": 50,\n    \"negativePressureStep\": 20,\n    \"pressureDiffThreshold\": 25,\n    \"clockwiseRotation\": \"true\",\n    \"defaultSpeed\": 0.1,\n    \"movePerStep\": 0.01,\n    \"runnerColor\": {\n        \"red\": 255,\n        \"green\": 255,\n        \"blue\": 255\n    }\n}"
+					"name": "overlay",
+					"item": [
+						{
+							"name": "activate brightnessByPressureMode",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"positivePressureRange\": 800,\n    \"negativePressureRange\": 500,\n    \"defaultBrightness\": 0.2,\n    \"minBrightness\": 0.01,\n    \"maxBrightness\": 0.5,\n    \"maxStep\": 0.07\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/mode/overlay/brightnessByPressureMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"overlay",
+										"brightnessByPressureMode"
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/mode/overlay/runningDotMode",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"mode",
-								"overlay",
-								"runningDotMode"
-							]
+						{
+							"name": "get brightnessByPressureModeConfig",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/mode/overlay/brightnessByPressureMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"overlay",
+										"brightnessByPressureMode"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activate runningDotMode",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"positivePressureStep\": 50,\n    \"negativePressureStep\": 20,\n    \"pressureDiffThreshold\": 25,\n    \"clockwiseRotation\": \"true\",\n    \"defaultSpeed\": 0.1,\n    \"movePerStep\": 0.01,\n    \"runnerColor\": {\n        \"red\": 255,\n        \"green\": 255,\n        \"blue\": 255\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/mode/overlay/runningDotMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"overlay",
+										"runningDotMode"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get runningDotModeConfig",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/mode/overlay/runningDotMode",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"overlay",
+										"runningDotMode"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disable overlay mode",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/mode/overlay/disable",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"mode",
+										"overlay",
+										"disable"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
