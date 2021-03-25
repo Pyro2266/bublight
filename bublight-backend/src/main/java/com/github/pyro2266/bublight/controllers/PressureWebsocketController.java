@@ -28,7 +28,7 @@ public class PressureWebsocketController {
     @PostMapping(path = "/setRefreshRate/{rate}")
     public ResponseEntity setRefreshRate(@PathVariable int rate) {
         LOG.info("Request to change refresh rate of pressure websocket to {} received", rate);
-        pressureWebsocketService.schedulePressureDiffNotifier(rate);
+        pressureWebsocketService.changeRefreshRate(rate);
         return ResponseEntity.ok().build();
     }
 
