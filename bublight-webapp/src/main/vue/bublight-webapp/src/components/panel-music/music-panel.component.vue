@@ -5,9 +5,8 @@
                 <i class="material-icons">music_note</i>
             </div>
             <p class="card-category">Hookah Music</p>
-            <h3 class="card-title">
-                <i @click="playMusic($event)" class="material-icons text-info play-button">play_arrow</i>
-                <div style="padding: 3px;" class="clearfix"></div>
+            <h3 style="height: 36px;" class="card-title">
+                <i @click="playMusic($event)" class="material-icons text-info icon-small mr-2 mt-1">play_arrow</i>                
             </h3>
         </div>
         <div class="card-footer">
@@ -15,18 +14,6 @@
         </div>
     </div>
 </template>
-
-<style>
-    .play-button {
-        width: 0 !important; 
-        height: 0 !important; 
-        position: absolute; 
-        top: 28px; 
-        right: 55px; 
-        line-height: 0px; 
-        cursor: pointer;
-    }
-</style>
 
 <script>
     export default {
