@@ -121,10 +121,8 @@
 
 			deactivateModes(e) {
 				switch(e.mode) {
-					case 'brightness':						
+					case 'overlay':						
 						this.$set(this.activeModes, 'brightness', false);
-						break;
-					case 'runningDot':						
 						this.$set(this.activeModes, 'runningDot', false);
 						break;					
 					case 'led':

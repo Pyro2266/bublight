@@ -25,10 +25,7 @@
             <input v-model.number="maxStep" name="maxStep" max="1" min="0.01" step="0.01" class="form-control" />
         </div>
         <button v-if="!activeModes.brightness" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
-        <div v-else>
-            <button @click="updateMode()" class="btn btn-success btn-sm">Update</button>
-            <button @click="deactivateMode()" class="btn btn-danger btn-sm">Deactivate</button>
-        </div>
+        <button v-else @click="updateMode()" class="btn btn-success btn-sm">Update</button>
     </div>
 </template>
 
@@ -84,10 +81,6 @@
 
             updateMode() {
                 this.modeSetRequest();
-            },
-
-            deactivateMode() {
-                this.$emit("setMode", {mode: "brightness", type: "deactivate"});
             }
         }
     }
