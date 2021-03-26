@@ -22,7 +22,9 @@
                     </ul>
                 </div>
             </div>
-            <button class="btn btn-sm btn-secondary" @click="disableOverlay()" style="position: absolute;top: 18px;right: 10px;">Disable Overlay</button>
+            <div class="disableOverlay">
+                <button class="btn btn-sm btn-secondary" @click="disableOverlay()" >Disable Overlay</button>
+            </div>
         </div>
         <div class="card-body">
             <div class="tab-content">

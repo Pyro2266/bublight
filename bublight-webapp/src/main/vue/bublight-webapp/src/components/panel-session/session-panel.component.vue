@@ -1,16 +1,16 @@
 <template>
-    <div class="card card-stats">
+    <div class="card card-stats session-card">
         <div class="card-header card-header-icon" :class="{ 'card-header-success': sessionRunning, 'card-header-info': !sessionRunning }">
             <div class="card-icon">
                 <img width="56" height="56" src="../../assets/hookah.svg">
             </div>
             <p class="card-category">Session</p>
-            <h3 style="height: 36px;" class="card-title">
+            <h3 style="min-height: 36px;" class="card-title">                
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <h3 class="m-0 text-success"><strong v-if="sessionRunning">{{ displayTimer }}</strong></h3>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <span v-show="!sessionRunning">
                             <i rel="tooltip" title="Start Session" data-toggle="modal" data-target="#sessionModal" class="material-icons icon-small text-info mr-2 mt-1">play_circle</i>                            
                         </span>
@@ -20,7 +20,7 @@
                         </span>
                         <i rel="tooltip" title="Session Settings" class="material-icons icon-small text-info mt-1">settings</i>
                     </div>  
-                </div>                                
+                </div>                                       
             </h3>
         </div>
         <div class="card-footer">
