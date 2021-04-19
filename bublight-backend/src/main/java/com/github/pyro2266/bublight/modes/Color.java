@@ -1,16 +1,19 @@
 package com.github.pyro2266.bublight.modes;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
+@AllArgsConstructor
 public class Color {
 
+    @Getter
     private final int red;
+    @Getter
     private final int green;
+    @Getter
     private final int blue;
-
-    public Color(int red, int green, int blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-    }
 
     public Color() {
         this(10, 10, 10);
@@ -27,28 +30,11 @@ public class Color {
         this(java.awt.Color.HSBtoRGB(hue, saturation, brightness));
     }
 
-    public int getRed() {
-        return red;
-    }
-
-    public int getGreen() {
-        return green;
-    }
-
-    public int getBlue() {
-        return blue;
-    }
-
     public static com.github.mbelling.ws281x.Color toWs281xColor(Color color) {
         return new com.github.mbelling.ws281x.Color(color.getRed(), color.getGreen(), color.getBlue());
     }
 
     public static float[] rgbToHsb(int r, int g, int b, float[] floats) {
         return java.awt.Color.RGBtoHSB(r, g, b, floats);
-    }
-
-    @Override
-    public String toString() {
-        return "Color{" + "red=" + red + ", green=" + green + ", blue=" + blue + '}';
     }
 }

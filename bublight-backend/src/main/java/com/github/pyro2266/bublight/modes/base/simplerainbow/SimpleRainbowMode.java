@@ -3,6 +3,8 @@ package com.github.pyro2266.bublight.modes.base.simplerainbow;
 import com.github.pyro2266.bublight.configuration.BubLightConfiguration;
 import com.github.pyro2266.bublight.modes.BaseLedMode;
 import com.github.pyro2266.bublight.modes.Color;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,14 @@ public class SimpleRainbowMode implements BaseLedMode {
 
     private final BubLightConfiguration bubLightConfiguration;
 
+    @Getter @Setter
     private float hue = 0;
+    @Getter @Setter
     private float saturation = 1;
+    @Getter @Setter
     private float value = 1;
 
+    @Getter @Setter
     private SimpleRainbowModeConfig config = new SimpleRainbowModeConfig();
 
     @Autowired
@@ -41,37 +47,5 @@ public class SimpleRainbowMode implements BaseLedMode {
         }
         hue = hue % MAX_HUE + config.getStep();
         return newColors;
-    }
-
-    public float getHue() {
-        return hue;
-    }
-
-    public void setHue(float hue) {
-        this.hue = hue;
-    }
-
-    public float getSaturation() {
-        return saturation;
-    }
-
-    public void setSaturation(float saturation) {
-        this.saturation = saturation;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    public SimpleRainbowModeConfig getConfig() {
-        return config;
-    }
-
-    public void setConfig(SimpleRainbowModeConfig config) {
-        this.config = config;
     }
 }
