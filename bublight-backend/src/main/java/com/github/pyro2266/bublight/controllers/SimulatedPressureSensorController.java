@@ -1,6 +1,6 @@
 package com.github.pyro2266.bublight.controllers;
 
-import com.github.pyro2266.bublight.pressure.driver.PressureSensorSimulatedImpl;
+import com.github.pyro2266.bublight.service.pressure.driver.PressureSensorSimulatedImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
