@@ -1,7 +1,7 @@
 package com.github.pyro2266.bublight.controllers;
 
-import com.github.pyro2266.bublight.pressure.PressureException;
-import com.github.pyro2266.bublight.pressure.PressureService;
+import com.github.pyro2266.bublight.service.pressure.data.PressureException;
+import com.github.pyro2266.bublight.service.pressure.PressureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.github.pyro2266.bublight.websocket;
 
-import com.github.pyro2266.bublight.modes.Color;
-import com.github.pyro2266.bublight.modes.ColorModesProcessor;
+import com.github.pyro2266.bublight.service.colormodes.ColorModesService;
+import com.github.pyro2266.bublight.service.colormodes.data.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,17 @@ public class LedColorsWebsocketService extends AbstractWebsocketService<Color[]>
     private static final String COLOR_WEBSOCKET_ENDPOINT = "/colorsSubscribe";
     private static final int DEFAULT_REFRESH_RATE = 100;
 
-    private final ColorModesProcessor colorModesProcessor;
+    private final ColorModesService colorModesService;
 
     @Autowired
-    public LedColorsWebsocketService(SimpMessagingTemplate template, ColorModesProcessor colorModesProcessor) {
+    public LedColorsWebsocketService(SimpMessagingTemplate template, ColorModesService colorModesService) {
         super(template, DEFAULT_REFRESH_RATE);
-        this.colorModesProcessor = colorModesProcessor;
+        this.colorModesService = colorModesService;
     }
 
     @Override
     Color[] getData() {
-        return this.colorModesProcessor.getCurrentColors();
+        return this.colorModesService.getCurrentColors();
     }
 
     @Override

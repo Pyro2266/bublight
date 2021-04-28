@@ -1,11 +1,11 @@
 package com.github.pyro2266.bublight.configuration;
 
-import com.github.pyro2266.bublight.led.core.LedRendererService;
-import com.github.pyro2266.bublight.led.core.LedRendererServiceImpl;
-import com.github.pyro2266.bublight.led.core.LedRendererServiceSimulatedImpl;
-import com.github.pyro2266.bublight.pressure.driver.BMP180Driver;
-import com.github.pyro2266.bublight.pressure.driver.PressureSensor;
-import com.github.pyro2266.bublight.pressure.driver.PressureSensorSimulatedImpl;
+import com.github.pyro2266.bublight.service.ledcore.LedRendererService;
+import com.github.pyro2266.bublight.service.ledcore.impl.LedRendererServiceImpl;
+import com.github.pyro2266.bublight.service.ledcore.impl.LedRendererServiceSimulatedImpl;
+import com.github.pyro2266.bublight.service.pressure.driver.BMP180Driver;
+import com.github.pyro2266.bublight.service.pressure.driver.PressureSensor;
+import com.github.pyro2266.bublight.service.pressure.driver.PressureSensorSimulatedImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
