@@ -19,13 +19,13 @@ Steps:
     mvn clean install -P build-web
     ```
 
-2. Go to the backend target directory: `cd lighty-backend/target`
+2. Go to the backend target directory: `cd bublight-backend/target`
 
 3. Start `.jar` file in a simulated mode with command: `java -jar bublight-backend-0.0.2-SNAPSHOT.jar --bublight.simulatedMode=true`.
 
 4. WebUI and REST endpoints are now available on `localhost` at port `8080`.
 
-5. Go to the WebUI (`localhost:8080`) and click things or play with Postman collection from the `docs` directory.
+5. Go to the WebUI (`localhost:8080`) and click things or play with Postman collection from the `docs` directory. Additionally, Swagger UI is available on URL `http://localhost:8080/swagger-ui/index.html`.
 
 6. Enjoy! But keep in mind that everything is still under development and all the risk is on you :).
 
@@ -119,8 +119,8 @@ Components used in demo:
 
 16. Copy executable `jar` file (from `bublight-backend/target` directory) and application properties (from `bublight-backend/src/main/resources` directory) to the Raspberry (into the `~/bublight` directory). Don't forget to update your IP address.
    ```
-   scp bublight-backend/target/bublight-backend-0.0.2-SNAPSHOT.jar pi@192.168.1.123:~/bublight
-   scp bublight-backend/src/main/resources/application.properties pi@192.168.1.123:~/bublight
+   scp bublight-backend/target/bublight-backend-0.0.2-SNAPSHOT.jar pi@IP_OF_YOUR_RPI:~/bublight
+   scp bublight-backend/src/main/resources/application.properties pi@IP_OF_YOUR_RPI:~/bublight
    ```
 
 17. Go back to the SSH session to Raspberry and go to the `bublight` directory we created before: `cd ~/bublight`.
@@ -131,7 +131,7 @@ Components used in demo:
 
 20. WebUI and REST endpoints are now available at port `8080`.
 
-21. Go to the WebUI (`IP_OF_YOUR_RPI:8080`) and click things or play with Postman collection from the `docs` directory.
+21. Go to the WebUI (`IP_OF_YOUR_RPI:8080`) and click things or play with Postman collection from the `docs` directory. Additionally, Swagger UI is available on URL `http://IP_OF_YOUR_RPI:8080/swagger-ui/index.html`.
 
 22. Enjoy! But keep in mind that everything is still under development and all the risk is on you :).
 
