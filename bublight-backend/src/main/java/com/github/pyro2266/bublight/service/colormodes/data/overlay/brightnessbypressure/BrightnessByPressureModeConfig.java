@@ -2,11 +2,35 @@ package com.github.pyro2266.bublight.service.colormodes.data.overlay.brightnessb
 
 public class BrightnessByPressureModeConfig {
 
-    private float positivePressureRange = 200;
-    private float negativePressureRange = 100;
+    /**
+     * Is used to determine how bright should the light be. If pressure difference reaches this value (or higher) then
+     * light should be at max brightness.
+     */
+    private float positivePressureRange = 800;
+
+    /**
+     * Same as positive pressure range but for negative pressure difference.
+     */
+    private float negativePressureRange = 200;
+
+    /**
+     * How bright should light be in idle state
+     */
     private float defaultBrightness = 0.2f;
+
+    /**
+     * Brightness will not be set lower than this value.
+     */
     private float minBrightness = 0.05f;
+
+    /**
+     * Brightness will not be set higher than this value.
+     */
     private float maxBrightness = 1f;
+
+    /**
+     * By how much can be brightness changed in one iteration.
+     */
     private float maxStep = 0.05f;
 
     public float getPositivePressureRange() {

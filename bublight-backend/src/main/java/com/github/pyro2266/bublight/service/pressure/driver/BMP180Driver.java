@@ -286,7 +286,7 @@ public class BMP180Driver implements PressureSensor {
         LOG.trace("X2 = " + X2);
         
         p = p + ((X1 + X2 + 3791) >> 4);
-        LOG.debug("Pressure = " + p + " Pa");
+        LOG.debug("Pressure = {} Pa", p);
 
         return p;
     }
