@@ -2,8 +2,8 @@ package com.github.pyro2266.bublight.service.colormodes.data.overlay.brightnessb
 
 import com.github.pyro2266.bublight.service.colormodes.data.Color;
 import com.github.pyro2266.bublight.service.colormodes.data.OverlayLedMode;
-import com.github.pyro2266.bublight.service.pressure.data.PressureException;
 import com.github.pyro2266.bublight.service.pressure.PressureService;
+import com.github.pyro2266.bublight.service.pressure.data.PressureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,27 @@ public class BrightnessByPressureMode implements OverlayLedMode {
         return MODE_ID;
     }
 
+    /**
+     * Takes pressure difference from sensor (calibrated pressure minus actual pressure) and divides it by positive
+     * pressure range (negative if difference is negative). This number is then multiplied
+     * by 'max brightness minus default brightness' (or min brightness if negative).
+     * This number represents brightness delta to be applied. Roughly this number represents (in percentage
+     * if multiplied by 100) by how much should be brightness changed.
+     * Then default brightness is added to this value which creates target brightness.
+     *
+     * Target brightness is how bright should light be. But it's not set to this value right away as max step
+     * comes in play.
+     *
+     * In each iteration actual brightness set is stored. New actual brightness in each iteration is calculated by
+     * adding max step to actual brightness. This means that in one iteration brightness will not be changed by value
+     * higher than max step value.
+     *
+     */
     @Override
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                // TODO refactor... hah, it's nearly three years now
+                // TODO refactor... hah, it's nearly three years now... five and counting!
                 float pressureDif = pressureService.getPressureDifference();
 
                 float brightnessDelta;
