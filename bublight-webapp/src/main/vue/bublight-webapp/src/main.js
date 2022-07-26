@@ -6,7 +6,7 @@ import store from './store'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-Vue.prototype.$apiURL = window.location.origin;
+Vue.prototype.$apiURL = "http://localhost:8080";
 
 new Vue({
     render (h) {

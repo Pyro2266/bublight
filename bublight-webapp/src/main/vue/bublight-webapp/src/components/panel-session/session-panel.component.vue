@@ -5,7 +5,7 @@
                 <img width="56" height="56" src="../../assets/hookah.svg">
             </div>
             <p class="card-category">Session</p>
-            <h3 style="min-height: 36px;" class="card-title">                
+            <h3 class="card-title">                
                 <div class="row">
                     <div class="col-lg-6">
                         <h3 class="m-0 text-success"><strong v-if="sessionRunning">{{ displayTimer }}</strong></h3>

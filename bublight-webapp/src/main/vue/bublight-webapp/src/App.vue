@@ -5,7 +5,7 @@
 				<session-panel />
 			</div>
 			<div class="col-lg-3 col-md-6">
-				<led-panel :activeModes="activeModes" @setMode="setMode($event)" />
+				<led-panel />
 			</div>
 			<div class="col-lg-3 col-md-6">
 				<music-panel />
@@ -17,10 +17,10 @@
 				<chart title="Pressure Chart" subtitle="Realtime" />
 			</div>
 			<div class="col-lg-6 col-md-12">
-				<mode-panel :activeModes="activeModes" @setMode="setMode($event)" />
+				<mode-panel />
 			</div>
 			<div class="col-lg-6 col-md-12">
-				<overlay-panel :activeModes="activeModes" @setMode="setMode($event)" />
+				<overlay-panel />
 			</div>
 		</div>
 		<session-modal />
@@ -36,6 +36,7 @@
 	import SessionPanel from './components/panel-session/session-panel.component';
 	import LedInfo from './components/led-info/led-info.component';
 	import SessionModal from './components/panel-session/modals/session-modal.component';
+	import _ from 'lodash';
 	
 
 	export default {
@@ -55,15 +56,12 @@
 		data() {
 			return {
 				pressure: 0,
-				pressureArray: [],
-				activeModes: {
-					led: false,
-					simpleColor: false,
-					rainbow: false,
-					brightness: false,
-					runningDot: false
-				}
+				pressureArray: [],				
 			}
+		},
+
+		async created() {
+			await this.getCurrentSettings();
 		},
 		
 		mounted() {
@@ -87,49 +85,22 @@
 		},
 
 		methods: {
-			setMode(e) {
-				if(e.type == 'activate') {
-					this.activateMode(e);
-				} else {
-					this.deactivateModes(e);
-				}
-			},
+			async getCurrentSettings() {
+				this.$http.get(this.$apiURL + "/config/current")
+                .then(response => {
+                    if(response.data.baseMode) {
+						this.$store.dispatch('activateMode', _.camelCase(response.data.baseMode.modeId));
+					}
 
-			activateMode(e) {
-				switch(e.mode) {
-					case 'brightness':
-						this.$set(this.activeModes, 'runningDot', false);
-						this.$set(this.activeModes, 'brightness', true);
-						break;
-					case 'runningDot':
-						this.$set(this.activeModes, 'brightness', false);
-						this.$set(this.activeModes, 'runningDot', true);
-						break;
-					case 'simpleColor':
-						this.$set(this.activeModes, 'rainbow', false);
-						this.$set(this.activeModes, 'simpleColor', true);
-						break;
-					case 'rainbow':
-						this.$set(this.activeModes, 'simpleColor', false);
-						this.$set(this.activeModes, 'rainbow', true);
-						break;
-					case 'led':
-						this.$set(this.activeModes, 'led', true);
-						break;
-				}	
-			},
+					if(response.data.overlayMode) {
+						this.$store.dispatch('activateMode', _.camelCase(response.data.overlayMode.modeId));
+					}
 
-			deactivateModes(e) {
-				switch(e.mode) {
-					case 'overlay':						
-						this.$set(this.activeModes, 'brightness', false);
-						this.$set(this.activeModes, 'runningDot', false);
-						break;					
-					case 'led':
-						this.$set(this.activeModes, 'led', false);
-						break;
-				}	
-			}
+					if(response.data.led) {
+						this.$store.dispatch('activateMode', 'led');
+					}
+                });		
+			},
 		}
 	}
 </script>
