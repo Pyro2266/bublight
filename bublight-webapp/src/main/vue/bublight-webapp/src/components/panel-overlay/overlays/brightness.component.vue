@@ -24,14 +24,13 @@
             <label for="maxStep" class="control-label">Max Step:</label>
             <input v-model.number="maxStep" name="maxStep" max="1" min="0.01" step="0.01" class="form-control" />
         </div>
-        <button v-if="!activeModes.brightness" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
+        <button v-if="!$store.state.activeModes.brightness" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
         <button v-else @click="updateMode()" class="btn btn-success btn-sm">Update</button>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ["activeModes"],
+    export default {        
 
         name: 'brightness',
 
@@ -41,7 +40,7 @@
                 negativePressureRange: 500,
                 defaultBrightness: 0.2,
                 minBrightness: 0.01,
-                maxBrightness: 0.5,
+                maxBrightness: 1,
                 maxStep: 0.07,   
             }
         },
@@ -76,7 +75,7 @@
 
             activateMode() {
                 this.modeSetRequest();
-                this.$emit("setMode", {mode: "brightness", type: "activate"});
+                this.$store.dispatch('activateMode', 'brightnessByPressure');                
             },
 
             updateMode() {

@@ -13,7 +13,7 @@
         <div class="clearfix"></div>
                 
         <hr style="background-color: rgba(180, 180, 180, 0.2)" />
-        <button v-if="!activeModes.simpleColor" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
+        <button v-if="!$store.state.activeModes.simpleColor" @click="activateMode()" class="btn btn-info btn-sm">Activate</button>
         <button v-else @click="updateMode()" class="btn btn-success btn-sm">Update</button>
     </div>
 </template>
@@ -21,9 +21,7 @@
 <script>
     import ColorNode from '../../color-node.component';
 
-    export default {
-        props: ["activeModes"],
-
+    export default {        
         components: {
             ColorNode
         },
@@ -72,7 +70,7 @@
 
             activateMode() {
                 this.modeSetRequest();
-                this.$emit("setMode", {mode: "simpleColor", type: "activate"});
+                this.$store.dispatch('activateMode', 'simple');                      
             },
 
             updateMode() {
