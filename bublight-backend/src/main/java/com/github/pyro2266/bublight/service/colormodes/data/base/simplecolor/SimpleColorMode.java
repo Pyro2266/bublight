@@ -19,12 +19,15 @@ public class SimpleColorMode implements BaseLedMode {
 
     @Autowired
     public SimpleColorMode(BubLightConfiguration bubLightConfiguration) {
+        config = new SimpleColorModeConfig(initColors(bubLightConfiguration.getLedCount()));
+    }
 
-        Color[] colors = new Color[bubLightConfiguration.getLedCount()];
+    private Color[] initColors(int ledCount) {
+        Color[] colors = new Color[ledCount];
         for (int i = 0; i < colors.length; i++) {
             colors[i] = new Color();
         }
-        config = new SimpleColorModeConfig(colors);
+        return colors;
     }
 
     @Override
@@ -40,6 +43,11 @@ public class SimpleColorMode implements BaseLedMode {
     @Override
     public String getModeId() {
         return MODE_ID;
+    }
+
+    @Override
+    public void setDefault() {
+        config = new SimpleColorModeConfig(initColors(config.getColors().length));
     }
 
     public SimpleColorModeConfig getConfig() {

@@ -35,6 +35,11 @@ public class RunningDotMode implements OverlayLedMode {
     }
 
     @Override
+    public void setDefault() {
+        config = new RunningDotModeConfig();
+    }
+
+    @Override
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {

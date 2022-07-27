@@ -38,6 +38,14 @@ public class SimpleRainbowMode implements BaseLedMode {
     }
 
     @Override
+    public void setDefault() {
+        config = new SimpleRainbowModeConfig();
+        hue = 0;
+        saturation = 1;
+        value =1;
+    }
+
+    @Override
     public Color[] getNextColors() {
         Color[] newColors = new Color[bubLightConfiguration.getLedCount()];
         for (int i = 0; i < newColors.length; i++) {
