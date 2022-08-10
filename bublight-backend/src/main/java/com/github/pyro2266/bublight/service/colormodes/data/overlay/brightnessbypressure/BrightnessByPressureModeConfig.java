@@ -33,6 +33,12 @@ public class BrightnessByPressureModeConfig {
      */
     private float maxStep = 0.05f;
 
+    /**
+     * If difference between last processed pressure difference and current difference is smaller than this threshold
+     * then last processed difference pressure is used.
+     */
+    private float pressureDiffThreshold = 15;
+
     public float getPositivePressureRange() {
         return positivePressureRange;
     }
@@ -79,6 +85,14 @@ public class BrightnessByPressureModeConfig {
 
     public void setMaxStep(float maxStep) {
         this.maxStep = maxStep;
+    }
+
+    public float getPressureDiffThreshold() {
+        return pressureDiffThreshold;
+    }
+
+    public void setPressureDiffThreshold(final float pressureDiffThreshold) {
+        this.pressureDiffThreshold = pressureDiffThreshold;
     }
 
     @Override

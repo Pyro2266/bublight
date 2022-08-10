@@ -19,7 +19,9 @@ public class BrightnessByPressureMode implements OverlayLedMode {
 
     private final float[] hsb = new float[3];
     private BrightnessByPressureModeConfig config = new BrightnessByPressureModeConfig();
+
     private float actualBrightness = config.getDefaultBrightness();
+    private float lastProcessedPressureDifference = 0;
 
 
     @Autowired
@@ -57,41 +59,15 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                // TODO refactor... hah, it's nearly three years now... five and counting!
-                float pressureDif = pressureService.getPressureDifference();
+                float pressureDiff = getPressureDiffToUse(pressureService.getPressureDifference());
 
-                float brightnessDelta;
-                if (pressureDif >= 0) {
-                    brightnessDelta = trimDecimal(pressureDif / config.getPositivePressureRange())
-                            * (config.getMaxBrightness() - config.getDefaultBrightness());
-                } else {
-                    brightnessDelta = trimDecimal(pressureDif / config.getNegativePressureRange())
-                            * (config.getDefaultBrightness() - config.getMinBrightness());
-                }
+                float brightnessDelta = calculateBrightnessDelta(pressureDiff);
 
                 float targetBrightness = config.getDefaultBrightness() + brightnessDelta;
-
                 float brightnessDifference = targetBrightness - actualBrightness;
-                float step;
-                if (Math.abs(brightnessDifference) > config.getMaxStep()) {
-                    step = config.getMaxStep() * (brightnessDifference < 0 ? -1 : 1);
-                } else {
-                    step = brightnessDifference;
-                }
 
-                actualBrightness += step;
-                if (actualBrightness > config.getMaxBrightness()) {
-                    actualBrightness = config.getMaxBrightness();
-                }
-                if (actualBrightness < config.getMinBrightness()) {
-                    actualBrightness = config.getMinBrightness();
-                }
-
-                for (int i = 0; i < baseColors.length; i++) {
-                    Color.rgbToHsb(baseColors[i].getRed(), baseColors[i].getGreen(), baseColors[i].getBlue(),
-                            hsb);
-                    baseColors[i] = new Color(hsb[0], hsb[1], actualBrightness);
-                }
+                float step = calculateStep(brightnessDifference);
+                updateBrightness(baseColors, step);
             } catch (PressureException e) {
                 LOG.error("Unable to set brightness", e);
             }
@@ -99,6 +75,61 @@ public class BrightnessByPressureMode implements OverlayLedMode {
             LOG.error("Mode configuration is not set!");
         }
         return baseColors;
+    }
+
+    private float getPressureDiffToUse(final float currentPressureDiff) {
+        float pressureDiff;
+        if (shouldProcess(currentPressureDiff)) {
+            lastProcessedPressureDifference = currentPressureDiff;
+            pressureDiff = currentPressureDiff;
+        } else {
+            LOG.debug("Pressure diff within threshold - using last processed diff. Current diff: {}; "
+                    + "last processed diff: {}", currentPressureDiff, lastProcessedPressureDifference);
+            pressureDiff = lastProcessedPressureDifference;
+        }
+        return pressureDiff;
+    }
+
+    private boolean shouldProcess(final float pressureDiff) {
+        return Math.abs(lastProcessedPressureDifference - pressureDiff) > config.getPressureDiffThreshold();
+    }
+
+    private void updateBrightness(final Color[] baseColors, final float step) {
+        actualBrightness += step;
+        if (actualBrightness > config.getMaxBrightness()) {
+            actualBrightness = config.getMaxBrightness();
+        }
+        if (actualBrightness < config.getMinBrightness()) {
+            actualBrightness = config.getMinBrightness();
+        }
+
+        for (int i = 0; i < baseColors.length; i++) {
+            Color.rgbToHsb(baseColors[i].getRed(), baseColors[i].getGreen(), baseColors[i].getBlue(),
+                    hsb);
+            baseColors[i] = new Color(hsb[0], hsb[1], actualBrightness);
+        }
+    }
+
+    private float calculateStep(final float brightnessDifference) {
+        float step;
+        if (Math.abs(brightnessDifference) > config.getMaxStep()) {
+            step = config.getMaxStep() * (brightnessDifference < 0 ? -1 : 1);
+        } else {
+            step = brightnessDifference;
+        }
+        return step;
+    }
+
+    private float calculateBrightnessDelta(final float pressureDif) {
+        float brightnessDelta;
+        if (pressureDif >= 0) {
+            brightnessDelta = trimDecimal(pressureDif / config.getPositivePressureRange())
+                    * (config.getMaxBrightness() - config.getDefaultBrightness());
+        } else {
+            brightnessDelta = trimDecimal(pressureDif / config.getNegativePressureRange())
+                    * (config.getDefaultBrightness() - config.getMinBrightness());
+        }
+        return brightnessDelta;
     }
 
     private float trimDecimal(float decimal) {
