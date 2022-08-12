@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class BubLightConfiguration {
 
     private int ledCount;
-    private boolean simulatedMode;
+    private boolean simulatedPressure;
+    private boolean simulatedLed;
 
     public int getLedCount() {
         return ledCount;
@@ -18,11 +19,20 @@ public class BubLightConfiguration {
         this.ledCount = ledCount;
     }
 
-    public boolean isSimulatedMode() {
-        return simulatedMode;
+    public boolean isSimulatedPressure() {
+        return simulatedPressure;
     }
 
-    public void setSimulatedMode(boolean simulatedMode) {
-        this.simulatedMode = simulatedMode;
+    public void setSimulatedPressure(final boolean simulatedPressure) {
+        this.simulatedPressure = simulatedPressure;
+    }
+
+    public boolean isSimulatedLed() {
+        return simulatedLed;
+    }
+
+    public void setSimulatedLed(final boolean simulatedLed) {
+        this.simulatedLed = simulatedLed;
     }
 }
+

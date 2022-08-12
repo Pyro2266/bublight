@@ -22,7 +22,7 @@ public class BubLightBeanConfiguration {
 
     @Bean
     public LedRendererService ledRendererService() {
-        if (bubLightConfiguration.isSimulatedMode()) {
+        if (bubLightConfiguration.isSimulatedLed()) {
             return new LedRendererServiceSimulatedImpl();
         } else {
             return new LedRendererServiceImpl(bubLightConfiguration);
@@ -31,7 +31,7 @@ public class BubLightBeanConfiguration {
 
     @Bean
     public PressureSensor pressureSensor() {
-        if (bubLightConfiguration.isSimulatedMode()) {
+        if (bubLightConfiguration.isSimulatedPressure()) {
             return new PressureSensorSimulatedImpl(0);
         } else {
             return new BMP180Driver();

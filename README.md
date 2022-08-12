@@ -21,7 +21,7 @@ Steps:
 
 2. Go to the backend target directory: `cd bublight-backend/target`
 
-3. Start `.jar` file in a simulated mode with command: `java -jar bublight-backend-0.0.2-SNAPSHOT.jar --bublight.simulatedMode=true`.
+3. Start `.jar` file in a simulated mode with command: `java -jar bublight-backend-0.0.2-SNAPSHOT.jar --bublight.simulatedPressure=true --bublight.simulatedLed=true`.
 
 4. WebUI and REST endpoints are now available on `localhost` at port `8080`.
 

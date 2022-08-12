@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/pressure/simulated")
-@ConditionalOnProperty(value="bublight.simulatedMode", havingValue = "true")
+@ConditionalOnProperty(value="bublight.simulatedPressure", havingValue = "true")
 public class SimulatedPressureSensorController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SimulatedPressureSensorController.class);
