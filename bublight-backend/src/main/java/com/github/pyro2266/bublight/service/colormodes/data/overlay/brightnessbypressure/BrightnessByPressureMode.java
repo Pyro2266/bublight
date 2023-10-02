@@ -2,8 +2,8 @@ package com.github.pyro2266.bublight.service.colormodes.data.overlay.brightnessb
 
 import com.github.pyro2266.bublight.service.colormodes.data.Color;
 import com.github.pyro2266.bublight.service.colormodes.data.OverlayLedMode;
-import com.github.pyro2266.bublight.service.pressure.PressureService;
-import com.github.pyro2266.bublight.service.pressure.data.PressureException;
+import com.github.pyro2266.bublight.service.sensor.SensorService;
+import com.github.pyro2266.bublight.service.sensor.data.SensorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     private static final Logger LOG = LoggerFactory.getLogger(BrightnessByPressureMode.class);
     private static final String MODE_ID = "Brightness by pressure";
 
-    private final PressureService pressureService;
+    private final SensorService sensorService;
 
     private final float[] hsb = new float[3];
     private BrightnessByPressureModeConfig config = new BrightnessByPressureModeConfig();
@@ -25,8 +25,8 @@ public class BrightnessByPressureMode implements OverlayLedMode {
 
 
     @Autowired
-    public BrightnessByPressureMode(PressureService pressureService) {
-        this.pressureService = pressureService;
+    public BrightnessByPressureMode(SensorService sensorService) {
+        this.sensorService = sensorService;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                float pressureDiff = getPressureDiffToUse(pressureService.getPressureDifference());
+                float pressureDiff = getPressureDiffToUse(sensorService.getPressureDifference());
 
                 float brightnessDelta = calculateBrightnessDelta(pressureDiff);
 
@@ -68,7 +68,7 @@ public class BrightnessByPressureMode implements OverlayLedMode {
 
                 float step = calculateStep(brightnessDifference);
                 updateBrightness(baseColors, step);
-            } catch (PressureException e) {
+            } catch (SensorException e) {
                 LOG.error("Unable to set brightness", e);
             }
         } else {

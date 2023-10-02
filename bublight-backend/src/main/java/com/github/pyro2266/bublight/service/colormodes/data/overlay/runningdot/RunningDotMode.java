@@ -3,8 +3,8 @@ package com.github.pyro2266.bublight.service.colormodes.data.overlay.runningdot;
 import com.github.pyro2266.bublight.configuration.BubLightConfiguration;
 import com.github.pyro2266.bublight.service.colormodes.data.Color;
 import com.github.pyro2266.bublight.service.colormodes.data.OverlayLedMode;
-import com.github.pyro2266.bublight.service.pressure.data.PressureException;
-import com.github.pyro2266.bublight.service.pressure.PressureService;
+import com.github.pyro2266.bublight.service.sensor.SensorService;
+import com.github.pyro2266.bublight.service.sensor.data.SensorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class RunningDotMode implements OverlayLedMode {
     private static final Logger LOG = LoggerFactory.getLogger(RunningDotMode.class);
     private static final String MODE_ID = "Running dot";
 
-    private final PressureService pressureService;
+    private final SensorService sensorService;
     private final int maxPosition;
 
     private RunningDotModeConfig config = new RunningDotModeConfig();
@@ -24,8 +24,8 @@ public class RunningDotMode implements OverlayLedMode {
     private float currentPosition = 0;
 
     @Autowired
-    public RunningDotMode(BubLightConfiguration bubLightConfiguration, PressureService pressureService) {
-        this.pressureService = pressureService;
+    public RunningDotMode(BubLightConfiguration bubLightConfiguration, SensorService sensorService) {
+        this.sensorService = sensorService;
         this.maxPosition = bubLightConfiguration.getLedCount();
     }
 
@@ -43,7 +43,7 @@ public class RunningDotMode implements OverlayLedMode {
     public Color[] getNextColors(Color[] baseColors) {
         if (config != null) {
             try {
-                float pressureDiff = pressureService.getPressureDifference();
+                float pressureDiff = sensorService.getPressureDifference();
 
                 float moveBy;
                 if (pressureDiff > -config.getPressureDiffThreshold() && pressureDiff < config
@@ -72,7 +72,7 @@ public class RunningDotMode implements OverlayLedMode {
                         currentPosition, (int) currentPosition);
                 baseColors[(int) currentPosition] = config.getRunnerColor();
 
-            } catch (PressureException e) {
+            } catch (SensorException e) {
                 LOG.error("Unable to get pressure", e);
             }
 

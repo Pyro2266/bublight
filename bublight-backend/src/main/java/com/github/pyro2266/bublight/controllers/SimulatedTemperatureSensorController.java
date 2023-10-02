@@ -15,28 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/pressure/simulated")
+@RequestMapping(path = "/temperature/simulated")
 @ConditionalOnExpression("${bublight.simulatedPressure} or ${bublight.simulatedSensor}")
-public class SimulatedPressureSensorController {
+public class SimulatedTemperatureSensorController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimulatedPressureSensorController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimulatedTemperatureSensorController.class);
 
     private final SensorSimulatedImpl sensorSimulated;
 
     @Autowired
-    public SimulatedPressureSensorController(Sensor sensor) {
-        LOG.info("Starting SIMULATED pressure sensor controller...");
+    public SimulatedTemperatureSensorController(Sensor sensor) {
+        LOG.info("Starting SIMULATED temperature sensor controller...");
         if (!(sensor instanceof SensorSimulatedImpl)) {
-            throw new IllegalStateException(String.format("Expected %s but got %s!", SensorSimulatedImpl.class,
+            throw new IllegalStateException(String.format("Expected %s but got %s!", SensorSimulatedImpl.class, 
                     Sensor.class));
         }
         this.sensorSimulated = (SensorSimulatedImpl) sensor;
     }
 
     @PostMapping(path = "/{value}")
-    public ResponseEntity setSimulatedPressureValue(@PathVariable float value) {
-        // set negative value - otherwise graph will be inverted
-        sensorSimulated.setPressure(-value);
+    public ResponseEntity setSimulatedTemperatureValue(@PathVariable float value) {
+        sensorSimulated.setTemperature(value);
         return ResponseEntity.ok().build();
     }
 }
