@@ -1,4 +1,4 @@
-package com.github.pyro2266.bublight.service.pressure.driver;
+package com.github.pyro2266.bublight.service.sensor.driver;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * BMP-180 I2C
  * 3.3V Bosch temperature and barometric pressure sensor
  */
-public class BMP180Driver implements PressureSensor {
+public class BMP180Driver implements Sensor {
 
     private static final Logger LOG = LoggerFactory.getLogger(BMP180Driver.class);
 
@@ -203,6 +203,7 @@ public class BMP180Driver implements PressureSensor {
         return raw;
     }
 
+    @Override
     public synchronized float readTemperature() throws IOException, InterruptedException {
         // Gets the compensated temperature in degrees celsius
         int UT = 0;

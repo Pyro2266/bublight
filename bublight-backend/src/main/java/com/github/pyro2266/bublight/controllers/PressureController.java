@@ -1,7 +1,7 @@
 package com.github.pyro2266.bublight.controllers;
 
-import com.github.pyro2266.bublight.service.pressure.data.PressureException;
-import com.github.pyro2266.bublight.service.pressure.PressureService;
+import com.github.pyro2266.bublight.service.sensor.SensorService;
+import com.github.pyro2266.bublight.service.sensor.data.SensorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,19 @@ public class PressureController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PressureController.class);
 
-    private final PressureService pressureService;
+    private final SensorService sensorService;
 
     @Autowired
-    public PressureController(PressureService pressureService) {
-        this.pressureService = pressureService;
+    public PressureController(SensorService sensorService) {
+        this.sensorService = sensorService;
     }
 
     @GetMapping(path = "/")
     public ResponseEntity getPressure() {
         float pressure;
         try {
-            pressure = pressureService.getPressure();
-        } catch (PressureException e) {
+            pressure = sensorService.getPressure();
+        } catch (SensorException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to read pressure!");
         }
         LOG.info("Pressure is: {}", pressure);
@@ -42,9 +42,9 @@ public class PressureController {
     @PostMapping(path = "/calibratePressure")
     public ResponseEntity calibratePressure() {
         try {
-            pressureService.calibrateNormalPressure();
+            sensorService.calibrateNormalPressure();
             return ResponseEntity.ok().build();
-        } catch (PressureException e) {
+        } catch (SensorException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to calibrate!");
         }
     }

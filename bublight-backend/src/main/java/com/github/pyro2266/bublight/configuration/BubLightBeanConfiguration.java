@@ -3,9 +3,9 @@ package com.github.pyro2266.bublight.configuration;
 import com.github.pyro2266.bublight.service.ledcore.LedRendererService;
 import com.github.pyro2266.bublight.service.ledcore.impl.LedRendererServiceImpl;
 import com.github.pyro2266.bublight.service.ledcore.impl.LedRendererServiceSimulatedImpl;
-import com.github.pyro2266.bublight.service.pressure.driver.BMP180Driver;
-import com.github.pyro2266.bublight.service.pressure.driver.PressureSensor;
-import com.github.pyro2266.bublight.service.pressure.driver.PressureSensorSimulatedImpl;
+import com.github.pyro2266.bublight.service.sensor.driver.BMP180Driver;
+import com.github.pyro2266.bublight.service.sensor.driver.Sensor;
+import com.github.pyro2266.bublight.service.sensor.driver.SensorSimulatedImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +30,9 @@ public class BubLightBeanConfiguration {
     }
 
     @Bean
-    public PressureSensor pressureSensor() {
+    public Sensor sensor() {
         if (bubLightConfiguration.isSimulatedPressure()) {
-            return new PressureSensorSimulatedImpl(0);
+            return new SensorSimulatedImpl(0, 0);
         } else {
             return new BMP180Driver();
         }
